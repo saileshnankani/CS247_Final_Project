@@ -7,31 +7,16 @@
 #ifndef LOCATION_H_
 #define LOCATION_H_
 
-
 #include<vector>
-#include"tile.h"
-#include"character.h"
+#include "tile.h"
+#include "../characters/character.h"
 
 class Location {
-        std::vector<std::vector<Tile>> grid;
+        std::vector<std::vector<Tile*>> grid;
         std::vector<Character> characters;
     public:
         Location();
         ~Location();
-        class Iterator{
-
-
-        };
-
-        Iterator begin();
-        Iterator end();
-
-        class ConstIterator{
-
-        };
-
-        ConstIterator cbegin();
-        ConstIterator cend();
 };
 
 #endif

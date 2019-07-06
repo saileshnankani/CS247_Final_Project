@@ -1,10 +1,12 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include "location.h"
+#include "locations/location.h"
+#include "subjectObserver/subject.h"
 #include <vector>
+#include <memory>
 
-class Game{
+class Game : public Subject{
     std::vector<Location*> locations;
     int currentLocation;
 
@@ -12,6 +14,7 @@ class Game{
         Game();
         ~Game();
         bool gameOver;
+        void run();
 };
 
 #endif

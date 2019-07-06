@@ -1,12 +1,11 @@
 #ifndef TILE_H_
 #define TILE_H_
 
-#include"character.h"
+#include "../locations/tile.h"
 
 class Tile{
         Character& occupant;
-        bool isOccupied;
-        char c;   // so this indicates whether it is 
+        enum tileType {wall, enemy, open, npc};
     public: 
         Tile();
         ~Tile();

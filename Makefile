@@ -1,7 +1,7 @@
 CXX = g++-5
 CXXFLAGS = -g -std=c++14 
 EXEC = run
-OBJECTS = location.o game.o tile.o character.o
+OBJECTS = locations/location.o game.o locations/tile.o characters/character.o /characters/player.o subjectObserver/subject.o subjectObserver/observer.o 
 DEPENDS = ${OBJECTS.o=.d}
 
 ${EXEC}: ${OBJECTS}

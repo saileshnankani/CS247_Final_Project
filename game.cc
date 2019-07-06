@@ -1,5 +1,6 @@
-#include "location.h"
-#include "character.h"
+#include "locations/location.h"
+#include "locations/tile.h"
+#include "characters/character.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -8,7 +9,8 @@
 
 using namespace std;
 
-Game::Game() : gameOver{false} {
+Game::Game() : gameOver{true} {
+
     string line;
 
     ifstream mcFile;
@@ -19,13 +21,19 @@ Game::Game() : gameOver{false} {
     tathamFile.open("locations/tatham.in");
     californiaFile.open("locations/california.in");
 
+
+
     if(mcFile.is_open()){
+        Location* mc = new Location();
         while(getline(mcFile,line)){
-            cout<<line<<endl;
+            Tile* tile;
+            for(char c: line){
+                tile = new Tile();
+            }
         }   
         mcFile.close();
+        locations.push_back(mc);
     }
-    cout<<endl;
 
     if(tathamFile.is_open()){
         while(getline(tathamFile,line)){
@@ -33,7 +41,6 @@ Game::Game() : gameOver{false} {
         }   
         tathamFile.close();
     }
-    cout<<endl;
 
     if(californiaFile.is_open()){
         while(getline(californiaFile,line)){
@@ -41,18 +48,32 @@ Game::Game() : gameOver{false} {
         }   
         californiaFile.close();
     }
-    cout<<endl;
+
+    run();
 }
 
 Game::~Game(){}
 
+void Game::run() {
+    gameOver = false;
+}
 
 
 int main(){
     char cmd;
     Game game;
 
-    while(!game.gameOver && cmd!='q'){
-        
+    while(!game.gameOver && cin>>cmd && cmd!='q'){
+        switch(cmd){
+            case 'n':
+                break;
+            case 's':
+                break;
+            case 'w':
+                break;
+            case 'e':
+                break;
+        }
+
     }
 }
