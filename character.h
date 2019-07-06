@@ -1,3 +1,6 @@
+#ifndef CHARACTER_H_
+#define CHARACTER_H_
+
 #include <utility>
 
 class Character{
@@ -6,4 +9,6 @@ class Character{
         Character();
         ~Character();
 };
+
+#endif
 

@@ -1,3 +1,6 @@
+#ifndef TILE_H_
+#define TILE_H_
+
 #include"character.h"
 
 class Tile{
@@ -8,3 +11,5 @@ class Tile{
         Tile();
         ~Tile();
 };  
+
+#endif

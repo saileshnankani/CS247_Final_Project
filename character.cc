@@ -5,7 +5,3 @@
  */
 
 #include "character.h"
-
-class Character{
-
-};

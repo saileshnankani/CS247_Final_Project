@@ -4,6 +4,10 @@
  * and California.
  */
 
+#ifndef LOCATION_H_
+#define LOCATION_H_
+
+
 #include<vector>
 #include"tile.h"
 #include"character.h"
@@ -29,3 +33,5 @@ class Location {
         ConstIterator cbegin();
         ConstIterator cend();
 };
+
+#endif
