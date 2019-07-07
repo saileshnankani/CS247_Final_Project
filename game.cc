@@ -16,40 +16,56 @@ Game::Game() : gameOver{true} {
     ifstream mcFile;
     ifstream tathamFile;
     ifstream californiaFile;
+    
+    vector<ifstream> maps;
+    vector<string> mapNames;
 
-    mcFile.open("locations/mc.in");
-    tathamFile.open("locations/tatham.in");
-    californiaFile.open("locations/california.in");
+    mapNames[0] = "mc";
+    mapNames[1] = "tatham";
+    mapNames[2] = "california";
+    maps.push_back(mcFile);
+    maps.push_back(tathamFile);
+    maps.push_back(californiaFile);
 
-
-
-    if(mcFile.is_open()){
-        Location* mc = new Location();
-        while(getline(mcFile,line)){
-            Tile* tile;
-            for(char c: line){
-                tile = new Tile();
-            }
-        }   
-        mcFile.close();
-        locations.push_back(mc);
+    for(int i=0; i<maps.size(); i++){
+        maps.at(i).open("locations/"+mapNames.at(i)+".in");
     }
 
-    if(tathamFile.is_open()){
-        while(getline(tathamFile,line)){
-            cout<<line<<endl;
-        }   
-        tathamFile.close();
-    }
-
-    if(californiaFile.is_open()){
-        while(getline(californiaFile,line)){
-            cout<<line<<endl;
-        }   
-        californiaFile.close();
+    Location* newLocation;
+    
+    for(int i=0; i<maps.size(); i++){
+        if(maps.at(i).is_open()){
+            vector<Tile*> grid; 
+            while(getline(maps.at(i),line)){
+                for(char c: line){
+                    switch(c){
+                        case 'X':
+                            grid.push_back(new Tile(Tile::tileType::wall, nullptr));
+                            break;
+                        case 'O':
+                            grid.push_back(new Tile(Tile::tileType::open, nullptr));
+                            break;
+                        case 'G':
+                            grid.push_back(new Tile(Tile::tileType::enemy, nullptr));
+                            break;
+                        default:  
+                            cerr<<"Invalid Map"<<endl;
+                            throw;
+                    }
+                }
+            }   
+            newLocation = new Location(grid,mapName.at(i));
+            locations.push_back(newLocation);
+            maps.at(i).close();
+            
+        }
     }
 
     run();
+}
+
+bool Game::getGameStatus(){
+    return gameOver;
 }
 
 Game::~Game(){}
@@ -63,7 +79,7 @@ int main(){
     char cmd;
     Game game;
 
-    while(!game.gameOver && cin>>cmd && cmd!='q'){
+    while(!game.getGameStatus && cin>>cmd && cmd!='q'){
         switch(cmd){
             case 'n':
                 break;

@@ -3,15 +3,16 @@
 
 #include <utility>
 #include "../locations/location.h"
+#include "../subjectObserver/subject.h"
 
 class Location;
 
-class Character{
+class Character : public Subject{
         std::pair<int,int> coordinates;
         Location* location;
     public:
         Character();
-        ~Character();
+        virtual ~Character();
 };
 
 #endif
