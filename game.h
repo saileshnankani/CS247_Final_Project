@@ -18,6 +18,7 @@ class Game : public Observer{
         ~Game();
         bool getGameStatus();
         void run();
+        void notify() override;
 };
 
 #endif

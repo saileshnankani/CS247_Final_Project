@@ -16,7 +16,7 @@ class Character : public Subject{
 
         // Should be a function that allows a character to be interacted with,
         // and possibly retrieve information from the source Character of the interaction.
-        virtual void notify(Character &source) = 0;
+        virtual void notify(Character &source) override;
 };
 
 #endif
