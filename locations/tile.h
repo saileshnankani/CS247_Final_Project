@@ -6,8 +6,9 @@
 class Tile{
         Character* occupant;
     public: 
-        Tile(tileType,Character*);
+        Tile(Character*);
         ~Tile();
+
         enum tileType {wall, enemy, open, npc};
 
         // Returns true if the tile is occupied

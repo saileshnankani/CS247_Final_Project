@@ -13,7 +13,12 @@ class Character : public Subject{
     public:
         Character();
         virtual ~Character();
+
+        // Should be a function that allows a character to be interacted with,
+        // and possibly retrieve information from the source Character of the interaction.
+        virtual void notify(Character &source) = 0;
 };
 
 #endif
+
 

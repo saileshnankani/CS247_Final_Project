@@ -40,13 +40,13 @@ Game::Game() : gameOver{true} {
                 for(char c: line){
                     switch(c){
                         case 'X':
-                            grid.push_back(new Tile(Tile::tileType::wall, nullptr));
+                            grid.push_back(new Tile(nullptr));
                             break;
                         case 'O':
-                            grid.push_back(new Tile(Tile::tileType::open, nullptr));
+                            grid.push_back(new Tile(nullptr));
                             break;
                         case 'G':
-                            grid.push_back(new Tile(Tile::tileType::enemy, nullptr));
+                            grid.push_back(new Tile(nullptr));
                             break;
                         default:  
                             cerr<<"Invalid Map"<<endl;
@@ -54,7 +54,7 @@ Game::Game() : gameOver{true} {
                     }
                 }
             }   
-            newLocation = new Location(grid,mapName.at(i));
+            newLocation = new Location(grid,mapNames.at(i));
             locations.push_back(newLocation);
             maps.at(i).close();
             

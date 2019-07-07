@@ -9,6 +9,7 @@
 
 #include<vector>
 #include<string>
+#include<memory>
 #include "npc.h"
 #include "combatant.h"
 #include "tile.h"
