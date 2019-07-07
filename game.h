@@ -2,19 +2,23 @@
 #define GAME_H_
 
 #include "locations/location.h"
-#include "subjectObserver/subject.h"
+#include "characters/combatant.h"
+#include "subjectObserver/observer.h"
 #include <vector>
 #include <memory>
 
-class Game : public Subject{
+class Game : public Observer{
     std::vector<Location*> locations;
     int currentLocation;
+    bool gameOver;
+    Combatant player;
 
     public:
         Game();
         ~Game();
-        bool gameOver;
+        bool getGameStatus();
         void run();
+        void notify() override;
 };
 
 #endif
