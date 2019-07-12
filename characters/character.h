@@ -2,21 +2,19 @@
 #define CHARACTER_H_
 
 #include <utility>
-#include "../locations/location.h"
-#include "../subjectObserver/subject.h"
 
 class Location;
 
-class Character : public Subject{
+class Character {
         std::pair<int,int> coordinates;
         Location* location;
     public:
-        Character();
-        virtual ~Character();
+        Character(int x,int y);
+        virtual ~Character() = 0;
 
         // Should be a function that allows a character to be interacted with,
         // and possibly retrieve information from the source Character of the interaction.
-        virtual void notify(Character &source) override;
+        virtual void notify(Character &source) = 0;
 };
 
 #endif

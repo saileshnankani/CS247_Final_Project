@@ -10,20 +10,21 @@
 #include<vector>
 #include<string>
 #include<memory>
-#include "npc.h"
-#include "combatant.h"
+#include "../characters/player.h"
+#include "../characters/combatant.h"
 #include "tile.h"
+#include "../characters/levels/level.h"
 
 class Location
 {
 private:
     // A location has all of the characters within it.
     // These are made separate since the operations involving these are usually different.
-    Character player;
-    std::vector<std::unique_ptr<NPC>> nonPlayerCharacters; // I split up the array 'characters' because NPCs don't take a turn, as we see at the bottom of this class
-    std::vector<std::unique_ptr<Combatant>> combatants;
+    std::unique_ptr<Player> player;
+    //std::vector<std::unique_ptr<NPC>> nonPlayerCharacters; // I split up the array 'characters' because NPCs don't take a turn, as we see at the bottom of this class
+    std::vector<std::unique_ptr<Enemy>> enemies;
 
-    std::vector<std::vector<Tile*>> grid;
+    std::vector<std::vector<Tile>> grid;
     // Doesn't really matter how grid is indexed, that is, x first VS. y first; don't get hung up on it
     // Nor does it matter whether y increases downwards VS. upwards - the math is a tiny bit different for each case.
     // Note that in computer graphics, the origin is usually in the top left (top left is (0,0))
@@ -52,9 +53,9 @@ private:
     std::string name;
 
 public:
-    // Currently only executes the Player and Enemys' turns
+    // Currently only executes the Player and Enemys' turns. TODO immediately next.
     void updateState();
-    Location(std::vector<Tile*>,std::string);
+    Location(std::string, Level&);
     ~Location();
 };
 

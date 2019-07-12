@@ -1,20 +1,17 @@
 #include "tile.h"
 
-Tile::Tile(enum tileType = wall, Character* occupant = nullptr) : tileType{tileType}, occupant{occupant} {
-    if(occupant!=nullptr){
-        isOccupied = true;
-    }
+Tile::Tile(TileType type = open) : type{type}, occupant{nullptr}{}
 
-}
+Tile::~Tile() {}
 
 bool Tile::isOccupied()
 {
     return occupant != nullptr;
 }
 
-void Tile::addOccupant(Character &c)
+void Tile::addOccupant(Character *c)
 {
-    occupant = &c;
+    occupant = c;
 }
 void Tile::evictOccupant()
 {

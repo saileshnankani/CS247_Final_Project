@@ -4,18 +4,22 @@
 #include "../characters/character.h"
 
 class Tile{
+        
         Character* occupant;
     public: 
-        Tile(Character*);
+
+        enum TileType {wall, open, teleporter};
+        TileType type;
+        Tile(TileType);
+        
         ~Tile();
 
-        enum tileType {wall, enemy, open, npc};
 
         // Returns true if the tile is occupied
         bool isOccupied();
 
         // Makes the passed character the tile's occupant
-        void addOccupant(Character &c);
+        void addOccupant(Character *c);
 
         // Removes the occupant of the tile
         void evictOccupant();

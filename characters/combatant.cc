@@ -1,14 +1,13 @@
 #include "combatant.h"
 
-Combatant::Combatant() : health{100} {}
+Combatant::Combatant(int x, int y) : Character(x,y) {}
 Combatant::~Combatant(){}
-void Combatant::takeDamage(int damage){
-    health-=damage;
-    if(damage<0){
-        Combatant::~Combatant();
-    }
-}
-int Combatant::getHealth(){
-    return health;
+
+// TODO: Implement
+void Combatant::notify(Character &source){
+
 }
 
+void Combatant::takeDamage(int damageAmount){
+
+}

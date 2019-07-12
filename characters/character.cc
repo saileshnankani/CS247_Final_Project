@@ -6,3 +6,9 @@
 
 #include "character.h"
 
+Character::Character(int x, int y) : coordinates(x,y) {}
+Character::~Character() {}
+
+void Character::notify(Character &source){
+
+}
