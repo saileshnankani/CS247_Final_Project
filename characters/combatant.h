@@ -4,14 +4,11 @@
 #include "character.h"
 
 class Combatant : public Character{
-        bool isPlayer;
-    protected: 
-        int health;
     public:
-        Combatant();
+        Combatant(int x,int y);
         virtual ~Combatant();
         virtual void takeDamage(int);
-        virtual int getHealth();
+        virtual void notify(Character &source);
 };
 
 #endif
