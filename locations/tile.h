@@ -4,19 +4,18 @@
 #include "../characters/character.h"
 
 class Tile{
-        
-        Character* occupant;
-    public: 
-
+        public:
         enum TileType {wall, open, teleporter};
-        TileType type;
+
         Tile(TileType);
         
         ~Tile();
-
+        TileType getTileType() const;
 
         // Returns true if the tile is occupied
-        bool isOccupied();
+        bool isOccupied() const;
+
+        char calculateDisplayedLetter() const;
 
         // Makes the passed character the tile's occupant
         void addOccupant(Character *c);
@@ -26,6 +25,10 @@ class Tile{
 
         // Calls the notify method of the occupant
         void notifyOccupant(Character &source);
+        private:
+        Character* occupant;
+        
+        TileType type;
         
 };  
 
