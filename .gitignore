@@ -30,6 +30,9 @@
 *.exe
 *.out
 *.app
+run
 
 # VS Code
-*.vscode/
+*.vscode
+.vs/*
+.vscode/*

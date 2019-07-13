@@ -28,9 +28,13 @@ public:
     // The game 'iterates' by updating the state of the current location;
     // as iterations happen, the data in the current Location changes.
     void updateCurrentLocationState();
+
+    void initializeLocations();
+
     void initializeEasyLevel();
     void initializeMediumLevel();
     void initializeHardLevel();
+    void initializeLevel(char levelChar);
 };
 
 #endif

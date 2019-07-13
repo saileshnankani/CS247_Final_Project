@@ -11,6 +11,16 @@
 
 using namespace std;
 
+//TODO: move this somewhere else as the responsibility of a view
+void Location::printGrid(){
+    for(const auto &row : grid){
+        for(const auto &tile : row){
+            std::cout<<tile.calculateDisplayedLetter()<<" ";
+        }
+        std::cout<<"\n"<<std::endl;
+    }
+}
+
 Location::Location(string name, Level& level) : name{name} {
 
     string line;
@@ -19,21 +29,25 @@ Location::Location(string name, Level& level) : name{name} {
     ifstream mapCharacters;
     ifstream mapNPC;
 
+    // It seems like the path is relative to where the executable is created,
+    // not sure why.
     map.open("locations/"+name+".in");
-    mapCharacters.open("../characters/"+name+"Characters.in");
-    mapNPC.open("../characters/"+name+"NPC.in");
+    mapCharacters.open("characters/"+name+"Characters.in");
+    mapNPC.open("characters/"+name+"NPC.in");
+
+    std::cout<<map.is_open()<< mapCharacters.is_open()<< mapNPC.is_open()<<std::endl;
 
     if(map.is_open() && mapCharacters.is_open() && mapNPC.is_open()){
-        vector<Tile*> grid; 
         while(getline(map,line)){
+            std::vector<Tile> row;
             for(char c: line){
                 switch(c){
                     case 'X':
-                        grid.push_back(new Tile(Tile::TileType::wall));
+                        row.emplace_back(Tile::TileType::wall);
                         break;
-                    // case 'O':
-                    //     grid.push_back(new Tile(Tile::TileType::open));
-                    //     break;
+                    case 'O':
+                        row.emplace_back(Tile::TileType::open);
+                        break;
                     // case 'G':
                     //     enemies.push_back(make_unique<Enemy>());
                     //     grid.push_back(new Tile(Tile::TileType::open));
@@ -42,10 +56,11 @@ Location::Location(string name, Level& level) : name{name} {
                     //     grid.push_back(new Tile(Tile::TileType::open));
                     //     break;                   
                     default:  
-                        grid.push_back(new Tile(Tile::TileType::open));
+                        // grid.push_back(new Tile(Tile::TileType::open));
                         break;
                 }
             }
+            grid.push_back(row);
         } 
     
         char character;
@@ -82,14 +97,86 @@ Location::Location(string name, Level& level) : name{name} {
     mapNPC.close();
 }
 
-// TODO. JUST NEEDED TO COMPILE 
-void Location::updateState(){
-
-}
-
 Tile &Location::tileAt(const std::pair<int, int> &coords)
 {
     int x = coords.first;
     int y = coords.second;
     return grid.at(y).at(x);
+}
+
+// Returns true if the tile with the specified coordinates is in-bounds and not a wall
+bool Location::isInteractiveTile(std::pair<int, int> coords)
+{
+    int x = coords.first;
+    int y = coords.second;
+    return (y >= 0 && y < grid.size() && x >= 0 && x < grid.at(y).size() && grid.at(y).at(x).getTileType() != Tile::wall);
+}
+
+void Location::executePlayerTurn()
+{
+    // calculateMove just takes input and returns a pair.  If desired we can move this user input to the controller.
+    //std::pair<int, int> targetTileCoords = player->calculateMove();
+    int x;
+    int y;
+    //TODO: move this somewhere else as the responsibility of a view
+    printGrid();
+    std::cout<<"Enter your next move"<<std::endl;
+    std::cin>>x>>y;
+    std::pair<int,int> targetTileCoords(x,y);
+    if (isInteractiveTile(targetTileCoords))
+    {
+        player->interactFromTileToTile(
+            tileAt(player->getCoordinates()),
+            tileAt(targetTileCoords),
+            targetTileCoords);
+    }
+}
+
+void Location::executeEnemyTurns()
+{
+    int playerX = player->getCoordinates().first;
+    int playerY = player->getCoordinates().second;
+
+    for (auto &enemy : enemies)
+    {
+        int enemyX = enemy->getCoordinates().first;
+        int enemyY = enemy->getCoordinates().second;
+
+        // Added a teeeeensy bit of pathfinding to the enemies;
+        // Note that if the enemy is blocked in x-movement, it will move in y due to separate if-statements
+        if (enemyX != playerX)
+        {
+            int enemyTargetX = (enemyX < playerX) ? enemyX + 1 : enemyX - 1; // Determine whether to try moving left or right
+            std::pair<int, int> enemyTargetCoords(enemyTargetX, enemyY);
+
+            if (isInteractiveTile(enemyTargetCoords))
+            {
+                enemy->interactFromTileToTile(
+                    tileAt(enemy->getCoordinates()),
+                    tileAt(enemyTargetCoords),
+                    enemyTargetCoords);
+                continue;
+            }
+        }
+        if (enemyY != playerY)
+        {
+            int enemyTargetY = (enemyY < playerY) ? enemyY + 1 : enemyY - 1; // Determine whether to try moving down or up
+            std::pair<int, int> enemyTargetCoords(enemyX, enemyTargetY);
+
+            if (isInteractiveTile(enemyTargetCoords))
+            {
+                enemy->interactFromTileToTile(
+                    tileAt(enemy->getCoordinates()),
+                    tileAt(enemyTargetCoords),
+                    enemyTargetCoords);
+                continue;
+            }
+        }
+    }
+}
+
+void Location::updateState()
+{
+    executePlayerTurn();
+    executeEnemyTurns();
 }

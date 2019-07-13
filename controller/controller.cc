@@ -1,26 +1,19 @@
 #include "controller.h"
 #include "../model/model.h"
 #include <iostream>
-
+#include<memory>
 
 using namespace std;
 
-Controller::Controller(Model& m) : model(m) {};
+Controller::Controller(Model & model) : model{model} {};
 
 void Controller::updateGameUntilGameOver(){
     cout<<"Choose a difficulty level: easy(E), medium(M), or hard(H)"<<endl;
-    char levelInput;
-    cin >> levelInput;
+    char levelChar;
+    cin >> levelChar;
 
-    switch(levelInput){
-        case 'E':
-            model.initializeEasyLevel();
-            break;
-        case 'M':
-            break;
-        case 'H':
-            break;
-    }
+    model.initializeLevel(levelChar);
+    model.initializeLocations();
 
 
     while(!model.getIsGameOver()){
