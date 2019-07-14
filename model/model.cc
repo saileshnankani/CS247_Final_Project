@@ -66,10 +66,6 @@ void Model::initializeLevel(char levelChar){
 Model::Model():isGameOver{false}{
 }
 
-std::vector<std::unique_ptr<View>> Model::getViews(){
-    return views;
-}
-
 void Model::addView(std::unique_ptr<View> v){
   views.emplace_back(std::move(v));
 }

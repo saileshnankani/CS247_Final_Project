@@ -39,7 +39,6 @@ public:
     void initializeHardLevel();
     void initializeLevel(char levelChar);
 
-    std::vector<std::unique_ptr<View>> getViews();
     void addView(std::unique_ptr<View> v);
     Location* getCurrentLocation();
     void displayViews();
