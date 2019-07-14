@@ -5,6 +5,7 @@
 #include <string>
 #include <memory>
 #include "../locations/location.h"
+#include "../view/view.h"
 #include "../characters/levels/level.h"
 #include "../characters/levels/easyLevel.h"
 #include "../characters/levels/mediumLevel.h"
@@ -20,6 +21,8 @@ private:
     std::vector<std::string> locationNames;
     Location *currentLocation;
     std::unique_ptr<Level> level;
+    std::vector<std::unique_ptr<View>> views;
+    
 public:
     bool getIsGameOver();
     Model();
@@ -28,13 +31,18 @@ public:
     // The game 'iterates' by updating the state of the current location;
     // as iterations happen, the data in the current Location changes.
     void updateCurrentLocationState();
-
+  
     void initializeLocations();
 
     void initializeEasyLevel();
     void initializeMediumLevel();
     void initializeHardLevel();
     void initializeLevel(char levelChar);
+
+    std::vector<std::unique_ptr<View>> getViews();
+    void addView(std::unique_ptr<View> v);
+    Location* getCurrentLocation();
+    void displayViews();
 };
 
 #endif

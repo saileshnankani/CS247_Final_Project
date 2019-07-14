@@ -1,7 +1,8 @@
 #include "controller.h"
 #include "../model/model.h"
+#include "../view/standard.h"
 #include <iostream>
-#include<memory>
+#include <memory>
 
 using namespace std;
 
@@ -14,9 +15,11 @@ void Controller::updateGameUntilGameOver(){
 
     model.initializeLevel(levelChar);
     model.initializeLocations();
+    model.addView(std::move(std::make_unique<Standard>(model.getCurrentLocation())));
 
 
     while(!model.getIsGameOver()){
+        model.displayViews();
         model.updateCurrentLocationState();
     }
 }
