@@ -22,23 +22,23 @@ void Graphic::updateView(){
                         squareSize*height + pad*(height+1));
 
     int x = pad, y = pad;
-    char tile;
+    char tileChar = '0';
 
     for(const auto &row : currentLocation->getGrid())
     {
         for(const auto &tile : row){
-            tile = tile.calculateDisplayedLetter();
+            tileChar = tile.calculateDisplayedLetter();
 
             int colour = 1;
 
-            if (c == 'O') {
+            if (tileChar == 'O') {
                 // Open tiles are white.
                 colour = 0;
             }
-            else if(c == 'A'){
+            else if(tileChar == 'A'){
                 colour = 4;
             }
-            else if (c == 'T') {
+            else if (tileChar == 'T') {
                 // Teleporters are red
                 colour = 2;
             }
