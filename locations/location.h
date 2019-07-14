@@ -14,6 +14,7 @@
 #include "../characters/combatant.h"
 #include "tile.h"
 #include "../characters/levels/level.h"
+#include "../controller/action.h"
 
 class Location
 {
@@ -44,11 +45,8 @@ private:
     // Returns true if the tile with the specified coordinates is in-bounds and not a wall
     bool isInteractiveTile(std::pair<int, int> coords);
 
-    // Runs the player's turn
-    void executePlayerTurn();
-
-    // Runs the enemy's turn
-    void executeEnemyTurns();
+    // Return true if the coordinate is out of the current location's map area
+    bool isOutofBounds(std::pair<int, int> coords);
 
     std::string name;
 
@@ -57,9 +55,17 @@ public:
     void printGrid();
 
     // Currently only executes the Player and Enemys' turns. TODO immediately next.
-    void updateState();
+    void updateState(Action a);
+
     Location(std::string, Level&);
     ~Location();
+    const std::vector<std::vector<Tile>> getMap();
+
+    // Runs the player's turn
+    void executePlayerTurn(Action a);
+
+    // Runs the enemy's turn
+    void executeEnemyTurns();
 };
 
 #endif

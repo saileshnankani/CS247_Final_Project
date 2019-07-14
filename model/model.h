@@ -9,17 +9,27 @@
 #include "../characters/levels/easyLevel.h"
 #include "../characters/levels/mediumLevel.h"
 #include "../characters/levels/hardLevel.h"
+#include "../view/view.h"
+#include "../controller/controller.h"
 
 // Model or one of these class's fields should observe if any Location's player's health is 0,
 // Or one of these should inform the model the game is over.
 class Model
 {
-private:
+    std::vector<std::unique_ptr<View>> views;
+    std::unique_ptr<Controller> control;
     bool isGameOver;
     std::vector<Location*> locations;
     std::vector<std::string> locationNames;
     Location *currentLocation;
     std::unique_ptr<Level> level;
+    int currentLocationNumber = 0;
+
+protected:
+    void addView(std::unique_ptr<View> v);
+    void addController(std::unique_ptr<Controller> v);
+    bool hasController();
+
 public:
     bool getIsGameOver();
     Model();
@@ -35,6 +45,16 @@ public:
     void initializeMediumLevel();
     void initializeHardLevel();
     void initializeLevel(char levelChar);
+
+    // void updateViews(int, int, State);
+    void updateViews(const std::string& s);
+    Action getAction();
+
+    void displayViews();
+    Action getAction();
+
+    Location* getCurrentLocation();
+    
 };
 
 #endif

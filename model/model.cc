@@ -10,9 +10,8 @@ bool Model::getIsGameOver()
     return isGameOver;
 }
 
-void Model::updateCurrentLocationState()
-{
-    currentLocation->updateState();
+Location* getcurrentLocation(){
+    return currentLocation;
 }
 
 void Model::initializeLocations(){
@@ -62,4 +61,15 @@ void Model::initializeLevel(char levelChar){
 
 
 //TODO: probably make it so that isGameOver can be set to false/true some time.
-Model::Model():isGameOver{false}{}
+Model::Model() : isGameOver{false}, currentLocation{nullptr} {}
+
+void Model::displayViews(){
+  for( auto& view: views ){
+    view->updateView(currentLocation);
+  }
+}
+
+Action Model::getAction(){
+  return control->getAction();
+}
+

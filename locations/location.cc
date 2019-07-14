@@ -11,14 +11,23 @@
 
 using namespace std;
 
-//TODO: move this somewhere else as the responsibility of a view
-void Location::printGrid(){
-    for(const auto &row : grid){
-        for(const auto &tile : row){
-            std::cout<<tile.calculateDisplayedLetter()<<" ";
-        }
-        std::cout<<"\n"<<std::endl;
+const vector<vector<Tile>> getMap(){
+    return grid;
+}
+
+bool isOutOfBounds(std::pair<int, int> coords){
+    if(coords.first<0 || coords.second < 0){
+        return false;
     }
+
+    int yMax = grid.size()-1;
+    int xMax = grid.at(coords.second).size()-1;
+
+    if(coords.second>yMax || coords.first > xMax){
+        return false;
+    }
+
+    return true;
 }
 
 Location::Location(string name, Level& level) : name{name} {
@@ -47,14 +56,7 @@ Location::Location(string name, Level& level) : name{name} {
                         break;
                     case 'O':
                         row.emplace_back(Tile::TileType::open);
-                        break;
-                    // case 'G':
-                    //     enemies.push_back(make_unique<Enemy>());
-                    //     grid.push_back(new Tile(Tile::TileType::open));
-                    //     break;
-                    // case 'T': 
-                    //     grid.push_back(new Tile(Tile::TileType::open));
-                    //     break;                   
+                        break;             
                     default:  
                         // grid.push_back(new Tile(Tile::TileType::open));
                         break;
@@ -89,9 +91,6 @@ Location::Location(string name, Level& level) : name{name} {
             }
         }
     }
-
-
-
     map.close();
     mapCharacters.close();
     mapNPC.close();
@@ -112,23 +111,38 @@ bool Location::isInteractiveTile(std::pair<int, int> coords)
     return (y >= 0 && y < grid.size() && x >= 0 && x < grid.at(y).size() && grid.at(y).at(x).getTileType() != Tile::wall);
 }
 
-void Location::executePlayerTurn()
+void Location::executePlayerTurn(Action a)
 {
     // calculateMove just takes input and returns a pair.  If desired we can move this user input to the controller.
     //std::pair<int, int> targetTileCoords = player->calculateMove();
-    int x;
-    int y;
-    //TODO: move this somewhere else as the responsibility of a view
-    printGrid();
-    std::cout<<"Enter your next move"<<std::endl;
-    std::cin>>x>>y;
+    int x = player->getCoordinates().first;
+    int y = player->getCoordinates().first;
+    switch(a){
+        case NONE:
+            break;
+        case UP:
+            y--;
+            break;
+        case DOWN:
+            y++;
+            break;
+        case LEFT:
+            x--;
+            break;
+        case RIGHT:
+            x++;
+            break;
+    }
     std::pair<int,int> targetTileCoords(x,y);
-    if (isInteractiveTile(targetTileCoords))
-    {
-        player->interactFromTileToTile(
-            tileAt(player->getCoordinates()),
-            tileAt(targetTileCoords),
-            targetTileCoords);
+
+    if(!isOutOfBounds(targetTileCoords)){
+        if (isInteractiveTile(targetTileCoords))
+        {
+            player->interactFromTileToTile(
+                tileAt(player->getCoordinates()),
+                tileAt(targetTileCoords),
+                targetTileCoords);
+        }
     }
 }
 
@@ -175,8 +189,8 @@ void Location::executeEnemyTurns()
     }
 }
 
-void Location::updateState()
+void Location::updateState(Action a)
 {
-    executePlayerTurn();
+    executePlayerTurn(a);
     executeEnemyTurns();
 }

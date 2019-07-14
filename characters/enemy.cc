@@ -17,5 +17,5 @@ int Enemy::getHealth(){
 }
 
 void Enemy::notify(Character &source){
-
+    
 }

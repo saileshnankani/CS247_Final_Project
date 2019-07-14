@@ -4,13 +4,11 @@
 #include "model/model.h"
 #include "controller/controller.h"
 
-class Game {
-        Model model;
-        Controller controller;
+class Game : Model {
     public:
-        Game();
+        Game(bool curses);
         ~Game();
-        void run();
+        void play();
 };
 
 #endif
