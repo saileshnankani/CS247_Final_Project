@@ -5,6 +5,7 @@
 #include <sstream>
 #include "location.h"
 #include "../characters/enemy.h"
+#include "../characters/npc.h"
 #include "../characters/player.h"
 #include "tile.h"
 #include "../characters/levels/level.h"
@@ -12,85 +13,111 @@
 using namespace std;
 
 //TODO: move this somewhere else as the responsibility of a view
-void Location::printGrid(){
-    for(const auto &row : grid){
-        for(const auto &tile : row){
-            std::cout<<tile.calculateDisplayedLetter()<<" ";
+void Location::printGrid()
+{
+    for (const auto &row : grid)
+    {
+        for (const auto &tile : row)
+        {
+            std::cout << tile.calculateDisplayedLetter() << " ";
         }
-        std::cout<<"\n"<<std::endl;
+        std::cout << "\n"
+                  << std::endl;
     }
 }
 
-Location::Location(string name, Level& level) : name{name} {
-
+Location::Location(string name, Level &level) : name{name}
+{
+    // Temporary variable that holds the most recent line read in from some file
     string line;
-   
+
     ifstream map;
     ifstream mapCharacters;
     ifstream mapNPC;
 
     // It seems like the path is relative to where the executable is created,
     // not sure why.
-    map.open("locations/"+name+".in");
-    mapCharacters.open("characters/"+name+"Characters.in");
-    mapNPC.open("characters/"+name+"NPC.in");
+    map.open("locations/" + name + ".in");
+    mapCharacters.open("characters/" + name + "Characters.in");
+    mapNPC.open("characters/" + name + "NPC.in");
 
-    std::cout<<map.is_open()<< mapCharacters.is_open()<< mapNPC.is_open()<<std::endl;
+    std::cout << map.is_open() << mapCharacters.is_open() << mapNPC.is_open() << std::endl;
 
-    if(map.is_open() && mapCharacters.is_open() && mapNPC.is_open()){
-        while(getline(map,line)){
+    if (map.is_open() && mapCharacters.is_open() && mapNPC.is_open())
+    {
+        while (getline(map, line))
+        {
             std::vector<Tile> row;
-            for(char c: line){
-                switch(c){
-                    case 'X':
-                        row.emplace_back(Tile::TileType::wall);
-                        break;
-                    case 'O':
-                        row.emplace_back(Tile::TileType::open);
-                        break;
-                    // case 'G':
-                    //     enemies.push_back(make_unique<Enemy>());
-                    //     grid.push_back(new Tile(Tile::TileType::open));
-                    //     break;
-                    // case 'T': 
-                    //     grid.push_back(new Tile(Tile::TileType::open));
-                    //     break;                   
-                    default:  
-                        // grid.push_back(new Tile(Tile::TileType::open));
-                        break;
+            for (char c : line)
+            {
+                switch (c)
+                {
+                case 'X':
+                    row.emplace_back(Tile::TileType::wall);
+                    break;
+                case 'O':
+                    row.emplace_back(Tile::TileType::open);
+                    break;
+                // case 'G':
+                //     enemies.push_back(make_unique<Enemy>());
+                //     grid.push_back(new Tile(Tile::TileType::open));
+                //     break;
+                // case 'T':
+                //     grid.push_back(new Tile(Tile::TileType::open));
+                //     break;
+                default:
+                    // grid.push_back(new Tile(Tile::TileType::open));
+                    break;
                 }
             }
             grid.push_back(row);
-        } 
-    
-        char character;
+        }
+
+        char characterLetter;
         int pos_x;
         int pos_y;
-        while(getline(mapCharacters, line)){
+        while (getline(mapCharacters, line))
+        {
             stringstream ss(line);
-            ss>>character>>pos_x>>pos_y;
-            switch(character){
-                case 'P': {
-                    Player* newPlayer= new Player(pos_x,pos_y);
-                    player = std::unique_ptr<Player>(newPlayer);
-                    Tile& tile = tileAt(make_pair(pos_x,pos_y));
-                    tile.addOccupant(newPlayer);
-                    break;
-                }
-                case 'G':{
-                    Enemy* newEnemy = level.createEnemy(pos_x, pos_y);
-                    enemies.emplace_back(std::unique_ptr<Enemy>(newEnemy));
-                    Tile& tile = tileAt(make_pair(pos_x,pos_y));
-                    tile.addOccupant(newEnemy);
-                    break;
-                }
-                default:
-                    throw; 
+            ss >> characterLetter >> pos_x >> pos_y;
+            switch (characterLetter)
+            {
+            case 'P':
+            {
+                Player *newPlayer = new Player(pos_x, pos_y);
+                player = std::unique_ptr<Player>(newPlayer);
+                Tile &tile = tileAt(make_pair(pos_x, pos_y));
+                tile.addOccupant(newPlayer);
+                break;
+            }
+            case 'G':
+            {
+                Enemy *newEnemy = level.createEnemy(pos_x, pos_y);
+                enemies.emplace_back(std::unique_ptr<Enemy>(newEnemy));
+                Tile &tile = tileAt(make_pair(pos_x, pos_y));
+                tile.addOccupant(newEnemy);
+                break;
+            }
+            default:
+                throw;
             }
         }
+
+        // NPCs must have a conversation (even if it is only 1 node large)
+        while (getline(mapNPC, line))
+        {
+            char npcLetter;
+            int npc_pos_x;
+            int npc_pos_y;
+            stringstream ss(line);
+            // TODO: Allow NPCs to take a single-letter name.
+            ss >> npcLetter >> npc_pos_x >> npc_pos_y;
+            NPC *newNPC = new NPC(npc_pos_x, npc_pos_y, mapNPC);
+            nonPlayerCharacters.emplace_back(std::unique_ptr<NPC>(newNPC));
+            Tile &tile = tileAt(make_pair(npc_pos_x, npc_pos_y));
+            tile.addOccupant(newNPC);
+        }
     }
-
-
 
     map.close();
     mapCharacters.close();
@@ -120,9 +147,9 @@ void Location::executePlayerTurn()
     int y;
     //TODO: move this somewhere else as the responsibility of a view
     printGrid();
-    std::cout<<"Enter your next move"<<std::endl;
-    std::cin>>x>>y;
-    std::pair<int,int> targetTileCoords(x,y);
+    std::cout << "Enter your next move" << std::endl;
+    std::cin >> x >> y;
+    std::pair<int, int> targetTileCoords(x, y);
     if (isInteractiveTile(targetTileCoords))
     {
         player->interactFromTileToTile(
