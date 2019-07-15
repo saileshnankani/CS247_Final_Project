@@ -8,7 +8,8 @@
 #include "../characters/npc.h"
 #include "../characters/player.h"
 #include "tile.h"
-#include "../characters/levels/level.h"
+#include "../characters/levels/level.h"  
+#include "../controller/action.h"
 
 using namespace std;
 
@@ -127,16 +128,36 @@ bool Location::isInteractiveTile(std::pair<int, int> coords)
     return (y >= 0 && y < grid.size() && x >= 0 && x < grid.at(y).size() && grid.at(y).at(x).getTileType() != Tile::wall);
 }
 
-void Location::executePlayerTurn()
+void Location::executePlayerTurn(Action a)
 {
     // calculateMove just takes input and returns a pair.  If desired we can move this user input to the controller.
     //std::pair<int, int> targetTileCoords = player->calculateMove();
-    int x;
-    int y;
+    int x = player->getCoordinates().first;
+    int y = player->getCoordinates().second;
     //TODO: move this somewhere else as the responsibility of a view
     // printGrid();
-    std::cout<<"Enter your next move"<<std::endl;
-    std::cin>>x>>y;
+
+    switch(a){
+        case NONE:
+            break;
+        case UP:
+            y -= 1;
+            break;
+        case DOWN:
+            y += 1;
+            break;
+        case RIGHT:
+            x += 1;
+            break;
+        case LEFT:
+            x -= 1;
+            break;
+        case INVALID:
+            cout<<"Sorry, incorrect move"<<endl;
+            return;
+            break;
+    }
+
     std::pair<int,int> targetTileCoords(x,y);
     if (isInteractiveTile(targetTileCoords))
     {
@@ -190,9 +211,9 @@ void Location::executeEnemyTurns()
     }
 }
 
-void Location::updateState()
+void Location::updateState(Action a)
 {
-    executePlayerTurn();
+    executePlayerTurn(a);
     executeEnemyTurns();
 }
 

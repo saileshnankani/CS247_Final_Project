@@ -1,5 +1,7 @@
 #include "model.h"
 #include "../view/standard.h"
+#include "../controller/controller.h"
+#include "../controller/action.h"
 #include <vector>
 #include <string>
 #include<iostream>
@@ -11,9 +13,9 @@ bool Model::getIsGameOver()
     return isGameOver;
 }
 
-void Model::updateCurrentLocationState()
+void Model::updateCurrentLocationState(Action a)
 {
-    currentLocation->updateState();
+    currentLocation->updateState(a);
 }
 
 void Model::initializeLocations(){
@@ -78,4 +80,15 @@ void Model::displayViews(){
   for( auto& view: views ){
     view->updateView();
   }
+}
+
+void Model::addController(std::unique_ptr<Controller> c){
+  control = std::move(c);
+}
+bool Model::hasController(){
+  return control != nullptr;
+}
+
+Action Model::getAction(){
+  return control->getAction();
 }
