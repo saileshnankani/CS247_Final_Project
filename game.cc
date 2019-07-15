@@ -46,7 +46,6 @@ void Game::run() {
     Action a;
     while(!model.getIsGameOver() && std::cin){
         model.displayViews();
-        std::cout<<"Enter your next move"<<std::endl;
         a = model.getAction();         
         model.updateCurrentLocationState(a);
     }

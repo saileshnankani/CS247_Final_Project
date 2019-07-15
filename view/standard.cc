@@ -19,4 +19,5 @@ void Standard::updateView(){
         }
         std::cout<<std::endl;
     }
+    cout<<"Enter your next move"<<endl;
 }
