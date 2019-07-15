@@ -60,6 +60,7 @@ public:
     Location(std::string, Level&);
     ~Location();
     std::vector<std::vector<Tile>> getGrid();
+    int getPlayerHealth() const;
 };
 
 #endif

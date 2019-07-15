@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <memory>
 #include "location.h"
 #include "../characters/enemy.h"
 #include "../characters/npc.h"
@@ -219,4 +220,8 @@ void Location::updateState(Action a)
 
 std::vector<std::vector<Tile>> Location::getGrid(){
     return grid;
+}
+
+int Location::getPlayerHealth() const{
+    return player->getHealth();
 }
