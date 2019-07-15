@@ -1,6 +1,9 @@
 #include "player.h"
 #include "enemy.h"
 #include "../locations/tile.h"
+#include <memory>
+
+std::unique_ptr<Player::Player_impl> Player::pimpl = std::make_unique<Player::Player_impl>();
 
 class Player::Player_impl
 {
@@ -11,6 +14,7 @@ public:
     Player_impl();
     int getDamage();
     void takeDamage(int damage);
+    int getHealth() const;
 };
 
 Player::Player_impl::Player_impl() : health{100}, damageAmount{10} {}
@@ -42,6 +46,11 @@ void Player::notify(Enemy &source)
     source.getDamage();
 }
 
+int Player::Player_impl::getHealth() const{
+    return health;
+}
+
+
 int Player::getDamage()
 {
     pimpl->getDamage();
@@ -64,4 +73,8 @@ void Player::interactFromTileToTile(Tile &from, Tile &to, std::pair<int,int> tar
         to.addOccupant(this);
         setCoordinates(targetCoords);
     }
+}
+
+int Player::getHealth() const{
+    return pimpl->getHealth();
 }

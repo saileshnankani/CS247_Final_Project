@@ -9,8 +9,8 @@ class Enemy : public Combatant{
     public:
         Enemy(int x, int y, int health, int damageAmount);
 
-        void notify(Player &source);
-        void notify(Enemy &source);
+        void notify(Player &source) override;
+        void notify(Enemy &source) override;
         virtual ~Enemy();
         virtual void takeDamage(int) override;
         virtual int getHealth(); 

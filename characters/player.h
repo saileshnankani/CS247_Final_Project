@@ -6,8 +6,9 @@
 
 
 class Player : public Combatant{
-    class Player_impl;
-    public:         
+    
+    public:        
+        class Player_impl; 
         static std::unique_ptr<Player_impl> pimpl;
 
         void notify(Player &source);
@@ -17,6 +18,7 @@ class Player : public Combatant{
         Player(int x, int y);
         ~Player();
         void interactFromTileToTile(Tile &from, Tile &to, std::pair<int,int> targetCoords) override;
+        int getHealth() const; 
 };
 
 #endif

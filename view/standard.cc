@@ -6,7 +6,12 @@ using namespace std;
 Standard::Standard(Location* currentLocation) : View{currentLocation} {};
 
 void Standard::updateView(){
-    
+
+    const int health = currentLocation->getPlayerHealth();
+
+    cout<<"Health: "<<health<<endl;
+    cout<<endl;
+
     for(const auto &row : currentLocation->getGrid())
     {
         for(const auto &tile : row){
