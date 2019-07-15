@@ -14,6 +14,7 @@
 #include "../characters/combatant.h"
 #include "tile.h"
 #include "../characters/levels/level.h"
+#include "../controller/action.h"
 
 class Location
 {
@@ -45,7 +46,7 @@ private:
     bool isInteractiveTile(std::pair<int, int> coords);
 
     // Runs the player's turn
-    void executePlayerTurn();
+    void executePlayerTurn(Action a);
 
     // Runs the enemy's turn
     void executeEnemyTurns();
@@ -54,7 +55,7 @@ private:
 
 public:
     // Currently only executes the Player and Enemys' turns. TODO immediately next.
-    void updateState();
+    void updateState(Action a);
     Location(std::string, Level&);
     ~Location();
     std::vector<std::vector<Tile>> getGrid();

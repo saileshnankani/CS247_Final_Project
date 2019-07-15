@@ -6,11 +6,10 @@
 
 class Game {
         Model model;
-        Controller controller;
     public:
-        Game();
+        Game(bool ncurses, bool graphic);
         ~Game();
-        void run(bool ncurses, bool graphics);
+        void run();
 };
 
 #endif
