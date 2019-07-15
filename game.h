@@ -10,7 +10,7 @@ class Game {
     public:
         Game();
         ~Game();
-        void run();
+        void run(bool ncurses, bool graphics);
 };
 
 #endif
