@@ -6,13 +6,14 @@
 
 
 class Player : public Combatant{
-    class Player_impl;
-    public:         
+    
+    public:        
+        class Player_impl; 
         static std::unique_ptr<Player_impl> pimpl;
-
         virtual void notify(Character &source);
         Player(int x, int y);
         ~Player();
+        int getHealth() const; 
 };
 
 #endif
