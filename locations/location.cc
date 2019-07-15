@@ -12,14 +12,7 @@
 using namespace std;
 
 //TODO: move this somewhere else as the responsibility of a view
-void Location::printGrid(){
-    for(const auto &row : grid){
-        for(const auto &tile : row){
-            std::cout<<tile.calculateDisplayedLetter()<<" ";
-        }
-        std::cout<<"\n"<<std::endl;
-    }
-}
+
 
 Location::Location(string name, Level& level) : name{name} {
 
@@ -119,7 +112,7 @@ void Location::executePlayerTurn()
     int x;
     int y;
     //TODO: move this somewhere else as the responsibility of a view
-    printGrid();
+    // printGrid();
     std::cout<<"Enter your next move"<<std::endl;
     std::cin>>x>>y;
     std::pair<int,int> targetTileCoords(x,y);
@@ -179,4 +172,8 @@ void Location::updateState()
 {
     executePlayerTurn();
     executeEnemyTurns();
+}
+
+std::vector<std::vector<Tile>> Location::getGrid(){
+    return grid;
 }

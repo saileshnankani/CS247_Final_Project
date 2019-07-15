@@ -53,13 +53,11 @@ private:
     std::string name;
 
 public:
-    //TODO: move this somewhere else as the responsibility of a view
-    void printGrid();
-
     // Currently only executes the Player and Enemys' turns. TODO immediately next.
     void updateState();
     Location(std::string, Level&);
     ~Location();
+    std::vector<std::vector<Tile>> getGrid();
 };
 
 #endif

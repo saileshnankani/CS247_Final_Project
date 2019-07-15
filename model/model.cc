@@ -1,4 +1,5 @@
 #include "model.h"
+#include "../view/standard.h"
 #include <vector>
 #include <string>
 #include<iostream>
@@ -62,4 +63,19 @@ void Model::initializeLevel(char levelChar){
 
 
 //TODO: probably make it so that isGameOver can be set to false/true some time.
-Model::Model():isGameOver{false}{}
+Model::Model():isGameOver{false}{
+}
+
+void Model::addView(std::unique_ptr<View> v){
+  views.emplace_back(std::move(v));
+}
+
+Location* Model::getCurrentLocation(){
+    return currentLocation;
+}
+
+void Model::displayViews(){
+  for( auto& view: views ){
+    view->updateView();
+  }
+}

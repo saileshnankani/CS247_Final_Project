@@ -12,7 +12,7 @@ class Controller
 public:
     Controller(Model & model);
     // Allows the game to execute by repeatedly updating the game state.
-    void updateGameUntilGameOver();
+    void updateGameUntilGameOver(bool ncurses, bool graphics);
 };
 
 #endif
