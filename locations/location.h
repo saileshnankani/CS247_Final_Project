@@ -11,7 +11,8 @@
 #include<string>
 #include<memory>
 #include "../characters/player.h"
-#include "../characters/combatant.h"
+#include "../characters/npc.h"
+#include "../characters/enemy.h"
 #include "tile.h"
 #include "../characters/levels/level.h"
 #include "../controller/action.h"
@@ -22,7 +23,7 @@ private:
     // A location has all of the characters within it.
     // These are made separate since the operations involving these are usually different.
     std::unique_ptr<Player> player;
-    //std::vector<std::unique_ptr<NPC>> nonPlayerCharacters; // I split up the array 'characters' because NPCs don't take a turn, as we see at the bottom of this class
+    std::vector<std::unique_ptr<NPC>> nonPlayerCharacters; // I split up the array 'characters' because NPCs don't take a turn, as we see at the bottom of this class
     std::vector<std::unique_ptr<Enemy>> enemies;
 
     std::vector<std::vector<Tile>> grid;

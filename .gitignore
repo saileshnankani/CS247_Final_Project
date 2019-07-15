@@ -36,3 +36,6 @@ run
 *.vscode
 .vs/*
 .vscode/*
+
+# Make-related files
+Makefile_*
