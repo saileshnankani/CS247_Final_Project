@@ -13,7 +13,8 @@ class Enemy : public Combatant{
         void notify(Enemy &source) override;
         virtual ~Enemy();
         virtual void takeDamage(int) override;
-        virtual int getHealth(); 
+        virtual int getHealth() const; 
+        bool isDead() const;
         int getDamage() override;
         void interactFromTileToTile(Tile &from, Tile &to, std::pair<int,int> targetCoords) override;
 };

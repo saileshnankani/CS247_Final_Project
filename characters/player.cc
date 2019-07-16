@@ -33,6 +33,7 @@ void Player::Player_impl::takeDamage(int damage)
     if (damage < 0)
     {
         // call location to remove the enemy
+        // (probably) REMEMBER TO REMOVE THE ENEMY FROM ITS TILE
     }
 }
 

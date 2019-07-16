@@ -16,10 +16,12 @@ void Enemy::takeDamage(int damage)
     if (damage < 0)
     {
         // call location to remove the enemy
+        // REMEMBER TO REMOVE THE ENEMY FROM ITS TILE
+        // Enemies must be removed from the game at the very end of turns, or else the range of the enemies vector may be invalidated!
     }
 }
 
-int Enemy::getHealth()
+int Enemy::getHealth() const
 {
     return health;
 }
@@ -27,6 +29,10 @@ int Enemy::getHealth()
 int Enemy::getDamage()
 {
     return damageAmount;
+}
+
+bool Enemy::isDead() const{
+    return getHealth() < 0;
 }
 
 void Enemy::notify(Player &source)

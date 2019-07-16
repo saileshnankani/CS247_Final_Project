@@ -8,6 +8,7 @@ class Combatant : public Character{
         Combatant(int x,int y);
         virtual ~Combatant();
         virtual int getDamage() =0;
+        virtual int getHealth() const =0; 
         //TODO: Remove this function
         virtual void takeDamage(int);
         //TODO: Remove this function
