@@ -93,7 +93,7 @@ void NPC::notify(Player &source)
 
 void NPC::notify(Enemy &source)
 {
-    conversation.startConversationFromCurrentNode();
+    // Do nothing; Enemies should not do anything when targeting an NPC.
 }
 
 void NPC::interactFromTileToTile(Tile &from, Tile &to, std::pair<int,int> targetCoords)
