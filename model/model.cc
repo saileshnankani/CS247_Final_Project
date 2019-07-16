@@ -19,7 +19,7 @@ void Model::updateCurrentLocationState(Action a)
 }
 
 void Model::initializeLocations(){
-    vector<string> locationNames{"mc","tatham"};
+    vector<string> locationNames{"mc","tatham", "california"};
     
     for(auto str : locationNames){
         // shared_ptr for later

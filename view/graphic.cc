@@ -4,7 +4,7 @@ Graphic::Graphic(Location *currentLocation) : View{currentLocation} {
 
     maxWidth = 0;
 
-    height = currentLocation->getGrid().size();
+    height = currentLocation->getGrid().size() + 1;
     for(int i=0; i<currentLocation->getGrid().size(); i++){
         maxWidth = currentLocation->getGrid().at(i).size() > maxWidth ? currentLocation->getGrid().at(i).size() : maxWidth;
     } 
@@ -23,6 +23,13 @@ void Graphic::updateView(){
 
     int x = pad, y = pad;
     char tileChar = '0';
+
+    const int health = currentLocation->getPlayerHealth();
+
+    window->fillRectangle(0, 0, 200, 15, 0);
+    window->drawString(0,0, "Health: "+health);
+
+    y+= 20;
 
     for(const auto &row : currentLocation->getGrid())
     {
@@ -44,6 +51,7 @@ void Graphic::updateView(){
             }
             
             window->fillRectangle(x, y, squareSize, squareSize, colour);
+            
             x += squareSize + pad;
         }
 

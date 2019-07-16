@@ -54,6 +54,7 @@ void Game::run() {
         isTeleported = model.getTeleportationStatus(a);     
         if(isTeleported){
             model.setNextLocation();
+            cout<<model.getCurrentLocation()->getName()<<endl;
             if(model.staticNcurses){
                 model.replaceView(std::move(std::make_unique<Curses>(model.getCurrentLocation())));
             }
