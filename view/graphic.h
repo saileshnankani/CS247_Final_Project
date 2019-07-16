@@ -9,7 +9,7 @@ class Graphic : public View
         Xwindow *window;
         int maxWidth;
         int height;
-        const int squareSize = 50;
+        const int squareSize = 25;
         const int pad = 2;
 
     public:

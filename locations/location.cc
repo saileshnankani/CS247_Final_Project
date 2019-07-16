@@ -53,9 +53,9 @@ Location::Location(string name, Level &level) : name{name}
                 //     enemies.push_back(make_unique<Enemy>());
                 //     grid.push_back(new Tile(Tile::TileType::open));
                 //     break;
-                // case 'T':
-                //     grid.push_back(new Tile(Tile::TileType::open));
-                //     break;
+                case 'T':
+                    row.emplace_back(Tile::TileType::teleporter);
+                    break;
                 default:
                     // grid.push_back(new Tile(Tile::TileType::open));
                     break;
@@ -235,4 +235,49 @@ std::vector<std::vector<Tile>> Location::getGrid()
 int Location::getPlayerHealth() const
 {
     return player->getHealth();
+}
+
+bool Location::isNextTileTeleporter(Action a)
+{
+    int x = player->getCoordinates().first;
+    int y = player->getCoordinates().second;
+
+    switch (a)
+    {
+    case NONE:
+        break;
+    case UP:
+        y -= 1;
+        break;
+    case DOWN:
+        y += 1;
+        break;
+    case RIGHT:
+        x += 1;
+        break;
+    case LEFT:
+        x -= 1;
+        break;
+    case INVALID:
+        cout << "Sorry, incorrect move" << endl;
+        return false;
+        break;
+    }
+
+    std::pair<int, int> targetTileCoords(x, y);
+    if (isInteractiveTile(targetTileCoords))
+    {
+        if(tileAt(targetTileCoords).getTileType()==tileAt(targetTileCoords).teleporter){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    return false;
+
+}
+
+string Location::getName(){
+    return name;
 }

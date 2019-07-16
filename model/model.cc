@@ -20,7 +20,7 @@ void Model::updateCurrentLocationState(Action a)
 }
 
 void Model::initializeLocations(){
-    vector<string> locationNames{"mc","tatham"};
+    vector<string> locationNames{"mc","tatham", "california"};
     
     for(auto str : locationNames){
         // shared_ptr for later
@@ -75,6 +75,11 @@ void Model::addView(std::unique_ptr<View> v){
   views.emplace_back(std::move(v));
 }
 
+void Model::replaceView(std::unique_ptr<View> v){
+  views.pop_back();
+  views.emplace_back(std::move(v));
+}
+
 Location* Model::getCurrentLocation(){
     return currentLocation;
 }
@@ -94,4 +99,19 @@ bool Model::hasController(){
 
 Action Model::getAction(){
   return control->getAction();
+}
+
+bool Model::getTeleportationStatus(Action a){
+    return currentLocation->isNextTileTeleporter(a);
+}
+
+void Model::setNextLocation(){
+    if(currentLocation->getName()=="mc"){
+        // go to tatham as our next location
+        currentLocation = locations[1];
+    }
+    else{
+        // go to california as our next location
+        currentLocation = locations[2];
+    }
 }

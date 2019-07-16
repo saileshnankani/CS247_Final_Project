@@ -18,6 +18,9 @@ Game::Game(bool ncurses, bool graphic) : model(){
 
     model.initializeLevel(levelChar);
     model.initializeLocations();
+
+    model.staticGraphic = graphic;
+    model.staticNcurses = ncurses;
     
     if(ncurses){
         model.addView(std::move(std::make_unique<Curses>(model.getCurrentLocation())));
@@ -44,10 +47,25 @@ Game::~Game(){}
 
 void Game::run() {
     Action a;
+    bool isTeleported = false;
     while(!model.getIsGameOver() && std::cin){
         model.displayViews();
-        std::cout<<"Enter your next move"<<std::endl;
-        a = model.getAction();         
+        a = model.getAction(); 
+        isTeleported = model.getTeleportationStatus(a);     
+        if(isTeleported){
+            model.setNextLocation();
+            cout<<model.getCurrentLocation()->getName()<<endl;
+            if(model.staticNcurses){
+                model.replaceView(std::move(std::make_unique<Curses>(model.getCurrentLocation())));
+            }
+            else if(model.staticGraphic){
+                model.replaceView(std::move(std::make_unique<Graphic>(model.getCurrentLocation())));
+            }
+            else{
+                model.replaceView(std::move(std::make_unique<Standard>(model.getCurrentLocation())));
+            }
+            continue;
+        }   
         model.updateCurrentLocationState(a);
     }
 }

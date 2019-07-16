@@ -61,6 +61,8 @@ public:
     ~Location();
     std::vector<std::vector<Tile>> getGrid();
     int getPlayerHealth() const;
+    bool isNextTileTeleporter(Action a);
+    std::string getName();
 };
 
 #endif
