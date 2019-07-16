@@ -13,12 +13,6 @@ void Enemy::takeDamage(int damage)
     health -= damage;
     //TODO: Remove this print statement
     std::cout<<"The enemy took "<<damage<<" damage!"<<std::endl;
-    if (damage < 0)
-    {
-        // call location to remove the enemy
-        // REMEMBER TO REMOVE THE ENEMY FROM ITS TILE
-        // Enemies must be removed from the game at the very end of turns, or else the range of the enemies vector may be invalidated!
-    }
 }
 
 int Enemy::getHealth() const
@@ -32,7 +26,7 @@ int Enemy::getDamage()
 }
 
 bool Enemy::isDead() const{
-    return getHealth() < 0;
+    return getHealth() <= 0;
 }
 
 void Enemy::notify(Player &source)

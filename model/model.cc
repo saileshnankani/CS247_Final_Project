@@ -5,12 +5,13 @@
 #include <vector>
 #include <string>
 #include<iostream>
+#include"../characters/player_impl.h"
 
 using namespace std;
 
 bool Model::getIsGameOver()
 {
-    return isGameOver;
+    return Player::isDead();
 }
 
 void Model::updateCurrentLocationState(Action a)
@@ -65,8 +66,10 @@ void Model::initializeLevel(char levelChar){
 
 
 //TODO: probably make it so that isGameOver can be set to false/true some time.
-Model::Model():isGameOver{false}{
+Model::Model(){
 }
+
+Model::~Model(){}
 
 void Model::addView(std::unique_ptr<View> v){
   views.emplace_back(std::move(v));

@@ -18,7 +18,6 @@
 class Model
 {
 private:
-    bool isGameOver;
     std::vector<Location*> locations;
     std::vector<std::string> locationNames;
     Location *currentLocation;
@@ -29,7 +28,7 @@ private:
 public:
     bool getIsGameOver();
     Model();
-    
+    ~Model();
     // Location state are the fields of Location.
     // The game 'iterates' by updating the state of the current location;
     // as iterations happen, the data in the current Location changes.

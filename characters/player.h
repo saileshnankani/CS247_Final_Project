@@ -19,6 +19,7 @@ class Player : public Combatant{
         ~Player();
         void interactFromTileToTile(Tile &from, Tile &to, std::pair<int,int> targetCoords) override;
         int getHealth() const; 
+        static bool isDead();
 };
 
 #endif

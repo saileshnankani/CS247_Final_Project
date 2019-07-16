@@ -3,39 +3,9 @@
 #include "../locations/tile.h"
 #include <memory>
 #include<iostream>
+#include"player_impl.h"
 
 std::unique_ptr<Player::Player_impl> Player::pimpl = std::make_unique<Player::Player_impl>();
-
-class Player::Player_impl
-{
-    int health;
-    int damageAmount;
-
-public:
-    Player_impl();
-    int getDamage();
-    void takeDamage(int damage);
-    int getHealth() const;
-};
-
-Player::Player_impl::Player_impl() : health{100}, damageAmount{10} {}
-
-int Player::Player_impl::getDamage()
-{
-    return damageAmount;
-}
-
-void Player::Player_impl::takeDamage(int damage)
-{
-    health -= damage;
-    //TODO: Remove this print statement
-    std::cout<<"You took "<<damage<<" damage!"<<std::endl;
-    if (damage < 0)
-    {
-        // call location to remove the enemy
-        // (probably) REMEMBER TO REMOVE THE ENEMY FROM ITS TILE
-    }
-}
 
 Player::Player(int x, int y) : Combatant(x, y) {}
 
@@ -81,4 +51,8 @@ void Player::interactFromTileToTile(Tile &from, Tile &to, std::pair<int,int> tar
 
 int Player::getHealth() const{
     return pimpl->getHealth();
+}
+
+bool Player::isDead(){
+    return pimpl->isDead();
 }
