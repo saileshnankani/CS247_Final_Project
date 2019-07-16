@@ -6,6 +6,9 @@
 #include <string>
 #include "character.h"
 
+class Player;
+class Enemy;
+
 class NPC : public Character
 {
     class Conversation
@@ -47,7 +50,9 @@ class NPC : public Character
 public:
     NPC(int x, int y, std::ifstream &npcFile);
 
-    void notify(Character &source) override;
+    void notify(Player &source);
+    void notify(Enemy &source);
+    void interactFromTileToTile(Tile &from, Tile &to, std::pair<int,int> targetCoords) override;
 };
 
 #endif

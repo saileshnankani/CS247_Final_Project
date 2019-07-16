@@ -1,5 +1,6 @@
 #include "npc.h"
-#include "character.h"
+#include "player.h"
+#include "../locations/tile.h"
 #include <string>
 #include <vector>
 #include <memory>
@@ -85,7 +86,17 @@ void NPC::Conversation::startConversationFromCurrentNode()
     }
 }
 
-void NPC::notify(Character &source)
+void NPC::notify(Player &source)
 {
     conversation.startConversationFromCurrentNode();
+}
+
+void NPC::notify(Enemy &source)
+{
+    // Do nothing; Enemies should not do anything when targeting an NPC.
+}
+
+void NPC::interactFromTileToTile(Tile &from, Tile &to, std::pair<int,int> targetCoords)
+{
+    // NPCs don't interact.
 }

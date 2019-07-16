@@ -12,28 +12,14 @@
 Character::Character(int x, int y) : coordinates(x,y), displayLetter{'A'} {}
 Character::~Character() {}
 
+void Character::setCoordinates(std::pair<int, int> newCoordinates){
+    coordinates = newCoordinates;
+}
+
 char Character::getDisplayLetter() const {
     return displayLetter;
 }
 
 std::pair<int,int> Character::getCoordinates(){
     return coordinates;
-}
-
-void Character::notify(Character &source){
-
-}
-
-void Character::interactFromTileToTile(Tile &from, Tile &to, std::pair<int,int> targetCoords)
-{
-    if (to.isOccupied())
-    {
-        to.notifyOccupant(*this); // Notifies the occupant of 'to' that *this is interacting with it.
-    }
-    else
-    {
-        from.evictOccupant();
-        to.addOccupant(this);
-        coordinates = targetCoords;
-    }
 }

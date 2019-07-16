@@ -3,6 +3,9 @@
 
 #include "../characters/character.h"
 
+class Player;
+class Enemy;
+
 class Tile{
         public:
         enum TileType {wall, open, teleporter};
@@ -24,7 +27,9 @@ class Tile{
         void evictOccupant();
 
         // Calls the notify method of the occupant
-        void notifyOccupant(Character &source);
+        void notifyOccupant(Player &source);
+        void notifyOccupant(Enemy &source);
+
         private:
         Character* occupant;
         

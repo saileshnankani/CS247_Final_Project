@@ -4,12 +4,13 @@
 #include <string>
 #include <sstream>
 #include <memory>
+#include <algorithm>
 #include "location.h"
 #include "../characters/enemy.h"
 #include "../characters/npc.h"
 #include "../characters/player.h"
 #include "tile.h"
-#include "../characters/levels/level.h"  
+#include "../characters/levels/level.h"
 #include "../controller/action.h"
 
 using namespace std;
@@ -138,28 +139,29 @@ void Location::executePlayerTurn(Action a)
     //TODO: move this somewhere else as the responsibility of a view
     // printGrid();
 
-    switch(a){
-        case NONE:
-            break;
-        case UP:
-            y -= 1;
-            break;
-        case DOWN:
-            y += 1;
-            break;
-        case RIGHT:
-            x += 1;
-            break;
-        case LEFT:
-            x -= 1;
-            break;
-        case INVALID:
-            cout<<"Sorry, incorrect move"<<endl;
-            return;
-            break;
+    switch (a)
+    {
+    case NONE:
+        break;
+    case UP:
+        y -= 1;
+        break;
+    case DOWN:
+        y += 1;
+        break;
+    case RIGHT:
+        x += 1;
+        break;
+    case LEFT:
+        x -= 1;
+        break;
+    case INVALID:
+        cout << "Sorry, incorrect move" << endl;
+        return;
+        break;
     }
 
-    std::pair<int,int> targetTileCoords(x,y);
+    std::pair<int, int> targetTileCoords(x, y);
     if (isInteractiveTile(targetTileCoords))
     {
         player->interactFromTileToTile(
@@ -216,12 +218,21 @@ void Location::updateState(Action a)
 {
     executePlayerTurn(a);
     executeEnemyTurns();
+    enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [&](auto const &ePtr) -> bool { 
+        if(ePtr->isDead()){
+        this->tileAt(ePtr->getCoordinates()).evictOccupant();
+        return true;
+        }
+        else{
+        return false; } }), enemies.end());
 }
 
-std::vector<std::vector<Tile>> Location::getGrid(){
+std::vector<std::vector<Tile>> Location::getGrid()
+{
     return grid;
 }
 
-int Location::getPlayerHealth() const{
+int Location::getPlayerHealth() const
+{
     return player->getHealth();
 }
