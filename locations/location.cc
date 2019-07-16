@@ -9,7 +9,7 @@
 #include "../characters/npc.h"
 #include "../characters/player.h"
 #include "tile.h"
-#include "../characters/levels/level.h"  
+#include "../characters/levels/level.h"
 #include "../controller/action.h"
 
 using namespace std;
@@ -52,9 +52,9 @@ Location::Location(string name, Level &level) : name{name}
                 //     enemies.push_back(make_unique<Enemy>());
                 //     grid.push_back(new Tile(Tile::TileType::open));
                 //     break;
-                // case 'T':
-                //     grid.push_back(new Tile(Tile::TileType::open));
-                //     break;
+                case 'T':
+                    row.emplace_back(Tile::TileType::teleporter);
+                    break;
                 default:
                     // grid.push_back(new Tile(Tile::TileType::open));
                     break;
@@ -138,28 +138,29 @@ void Location::executePlayerTurn(Action a)
     //TODO: move this somewhere else as the responsibility of a view
     // printGrid();
 
-    switch(a){
-        case NONE:
-            break;
-        case UP:
-            y -= 1;
-            break;
-        case DOWN:
-            y += 1;
-            break;
-        case RIGHT:
-            x += 1;
-            break;
-        case LEFT:
-            x -= 1;
-            break;
-        case INVALID:
-            cout<<"Sorry, incorrect move"<<endl;
-            return;
-            break;
+    switch (a)
+    {
+    case NONE:
+        break;
+    case UP:
+        y -= 1;
+        break;
+    case DOWN:
+        y += 1;
+        break;
+    case RIGHT:
+        x += 1;
+        break;
+    case LEFT:
+        x -= 1;
+        break;
+    case INVALID:
+        cout << "Sorry, incorrect move" << endl;
+        return;
+        break;
     }
 
-    std::pair<int,int> targetTileCoords(x,y);
+    std::pair<int, int> targetTileCoords(x, y);
     if (isInteractiveTile(targetTileCoords))
     {
         player->interactFromTileToTile(
@@ -218,10 +219,57 @@ void Location::updateState(Action a)
     executeEnemyTurns();
 }
 
-std::vector<std::vector<Tile>> Location::getGrid(){
+std::vector<std::vector<Tile>> Location::getGrid()
+{
     return grid;
 }
 
-int Location::getPlayerHealth() const{
+int Location::getPlayerHealth() const
+{
     return player->getHealth();
+}
+
+bool Location::isNextTileTeleporter(Action a)
+{
+    int x = player->getCoordinates().first;
+    int y = player->getCoordinates().second;
+
+    switch (a)
+    {
+    case NONE:
+        break;
+    case UP:
+        y -= 1;
+        break;
+    case DOWN:
+        y += 1;
+        break;
+    case RIGHT:
+        x += 1;
+        break;
+    case LEFT:
+        x -= 1;
+        break;
+    case INVALID:
+        cout << "Sorry, incorrect move" << endl;
+        return false;
+        break;
+    }
+
+    std::pair<int, int> targetTileCoords(x, y);
+    if (isInteractiveTile(targetTileCoords))
+    {
+        if(tileAt(targetTileCoords).getTileType()==tileAt(targetTileCoords).teleporter){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    return false;
+
+}
+
+string Location::getName(){
+    return name;
 }

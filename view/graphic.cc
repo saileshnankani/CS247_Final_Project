@@ -7,7 +7,7 @@ Graphic::Graphic(Location *currentLocation) : View{currentLocation} {
     height = currentLocation->getGrid().size();
     for(int i=0; i<currentLocation->getGrid().size(); i++){
         maxWidth = currentLocation->getGrid().at(i).size() > maxWidth ? currentLocation->getGrid().at(i).size() : maxWidth;
-    }
+    } 
 
     window = new Xwindow{squareSize*maxWidth + pad*(maxWidth+1),
                         squareSize*height + pad*(height+1)};

@@ -43,12 +43,17 @@ public:
     void initializeLevel(char levelChar);
 
     void addView(std::unique_ptr<View> v);
+    void replaceView(std::unique_ptr<View> v);
     void addController(std::unique_ptr<Controller> v);
     bool hasController();
     Action getAction();
     
     Location* getCurrentLocation();
+    void setNextLocation();
     void displayViews();
+    bool getTeleportationStatus(Action a);
+    bool staticNcurses = false;
+    bool staticGraphic = false;
 };
 
 #endif
