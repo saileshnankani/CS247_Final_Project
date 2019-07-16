@@ -2,6 +2,7 @@
 #include "enemy.h"
 #include "../locations/tile.h"
 #include <memory>
+#include<iostream>
 
 std::unique_ptr<Player::Player_impl> Player::pimpl = std::make_unique<Player::Player_impl>();
 
@@ -27,6 +28,8 @@ int Player::Player_impl::getDamage()
 void Player::Player_impl::takeDamage(int damage)
 {
     health -= damage;
+    //TODO: Remove this print statement
+    std::cout<<"You took "<<damage<<" damage!"<<std::endl;
     if (damage < 0)
     {
         // call location to remove the enemy
@@ -43,7 +46,7 @@ void Player::notify(Player &source)
 }
 void Player::notify(Enemy &source)
 {
-    source.getDamage();
+    takeDamage(source.getDamage());
 }
 
 int Player::Player_impl::getHealth() const{

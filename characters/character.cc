@@ -23,18 +23,3 @@ char Character::getDisplayLetter() const {
 std::pair<int,int> Character::getCoordinates(){
     return coordinates;
 }
-
-// TODO: remove
-// void Character::interactFromTileToTile(Tile &from, Tile &to, std::pair<int,int> targetCoords)
-// {
-//     if (to.isOccupied())
-//     {
-//         to.notifyOccupant(*this); // Notifies the occupant of 'to' that *this is interacting with it.
-//     }
-//     else
-//     {
-//         from.evictOccupant();
-//         to.addOccupant(this);
-//         coordinates = targetCoords;
-//     }
-// }

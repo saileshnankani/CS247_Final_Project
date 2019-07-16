@@ -1,6 +1,7 @@
 #include "enemy.h"
 #include "player.h"
 #include "../locations/tile.h"
+#include<iostream>
 
 Enemy::Enemy(int x, int y, int health, int damageAmount) : Combatant(x, y),
                                                            health{health}, damageAmount{damageAmount} {};
@@ -10,6 +11,8 @@ Enemy::~Enemy(){};
 void Enemy::takeDamage(int damage)
 {
     health -= damage;
+    //TODO: Remove this print statement
+    std::cout<<"The enemy took "<<damage<<" damage!"<<std::endl;
     if (damage < 0)
     {
         // call location to remove the enemy
