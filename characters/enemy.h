@@ -7,12 +7,15 @@ class Enemy : public Combatant{
         int health;
         int damageAmount;
     public:
-        Enemy(int,int,int,int);
+        Enemy(int x, int y, int health, int damageAmount);
 
-        virtual void notify(Character &source);
+        void notify(Player &source) override;
+        void notify(Enemy &source) override;
         virtual ~Enemy();
         virtual void takeDamage(int) override;
         virtual int getHealth(); 
+        int getDamage() override;
+        void interactFromTileToTile(Tile &from, Tile &to, std::pair<int,int> targetCoords) override;
 };
 
 #endif

@@ -39,7 +39,12 @@ void Tile::evictOccupant()
 {
     occupant = nullptr;
 }
-void Tile::notifyOccupant(Character &source)
+void Tile::notifyOccupant(Player &source)
+{
+    occupant->notify(source);
+}
+
+void Tile::notifyOccupant(Enemy &source)
 {
     occupant->notify(source);
 }
