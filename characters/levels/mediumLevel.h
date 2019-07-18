@@ -6,7 +6,7 @@
 
 class MediumLevel : public Level{
     public: 
-        MediumEnemy* createEnemy(int x, int y) override;
+        MediumEnemy* createEnemy(int x, int y, char displayLetter) override;
         MediumLevel();
 };
 

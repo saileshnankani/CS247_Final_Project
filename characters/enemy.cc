@@ -3,7 +3,7 @@
 #include "../locations/tile.h"
 #include<iostream>
 
-Enemy::Enemy(int x, int y, int health, int damageAmount) : Combatant(x, y),
+Enemy::Enemy(int x, int y, int health, int damageAmount, char displayLetter) : Combatant(x, y, displayLetter),
                                                            health{health}, damageAmount{damageAmount} {};
 
 Enemy::~Enemy(){};

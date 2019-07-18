@@ -5,7 +5,7 @@
 
 class Combatant : public Character{
     public:
-        Combatant(int x,int y);
+        Combatant(int x,int y, char displayLetter);
         virtual ~Combatant();
         virtual int getDamage() =0;
         virtual int getHealth() const =0; 

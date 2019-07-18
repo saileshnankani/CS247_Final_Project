@@ -6,7 +6,7 @@
 
 class HardLevel : public Level{
     public: 
-        HardEnemy* createEnemy(int x, int y) override;
+        HardEnemy* createEnemy(int x, int y, char displayLetter) override;
         HardLevel();
 };
 

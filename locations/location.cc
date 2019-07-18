@@ -84,7 +84,7 @@ Location::Location(string name, Level &level) : name{name}
             }
             case 'G':
             {
-                Enemy *newEnemy = level.createEnemy(pos_x, pos_y);
+                Enemy *newEnemy = level.createEnemy(pos_x, pos_y, characterLetter);
                 enemies.emplace_back(std::unique_ptr<Enemy>(newEnemy));
                 Tile &tile = tileAt(make_pair(pos_x, pos_y));
                 tile.addOccupant(newEnemy);
@@ -104,7 +104,7 @@ Location::Location(string name, Level &level) : name{name}
             stringstream ss(line);
             // TODO: Allow NPCs to take a single-letter name.
             ss >> npcLetter >> npc_pos_x >> npc_pos_y;
-            NPC *newNPC = new NPC(npc_pos_x, npc_pos_y, mapNPC);
+            NPC *newNPC = new NPC(npc_pos_x, npc_pos_y, mapNPC, npcLetter);
             nonPlayerCharacters.emplace_back(std::unique_ptr<NPC>(newNPC));
             Tile &tile = tileAt(make_pair(npc_pos_x, npc_pos_y));
             tile.addOccupant(newNPC);
@@ -119,7 +119,7 @@ Location::Location(string name, Level &level) : name{name}
             stringstream ss(line);
             // TODO: Allow NPCs to take a single-letter name.
             ss >> interviewerLetter >> interviewer_pos_x >> interviewer_pos_y;
-            Interviewer *newInterviewer = new Interviewer(interviewer_pos_x, interviewer_pos_y, mapInterviewers);
+            Interviewer *newInterviewer = new Interviewer(interviewer_pos_x, interviewer_pos_y, mapInterviewers, interviewerLetter);
             interviewers.emplace_back(std::unique_ptr<Interviewer>(newInterviewer));
             Tile &tile = tileAt(make_pair(interviewer_pos_x, interviewer_pos_y));
             tile.addOccupant(newInterviewer);

@@ -3,6 +3,6 @@
 
 MediumLevel::MediumLevel() {};
 
-MediumEnemy* MediumLevel::createEnemy(int x, int y){
-    return new MediumEnemy(x,y);
+MediumEnemy* MediumLevel::createEnemy(int x, int y, char displayLetter){
+    return new MediumEnemy(x,y,displayLetter);
 }

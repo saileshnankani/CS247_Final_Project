@@ -3,9 +3,10 @@
 
 #include "../enemy.h"
 
-class EasyEnemy : public Enemy{
-    public:
-        EasyEnemy(int x,int y, int health = 100, int damageAmount = 5);
+class EasyEnemy : public Enemy
+{
+public:
+    EasyEnemy(int x, int y, char displayLetter, int health = 100, int damageAmount = 5);
 };
 
-#endif  
+#endif

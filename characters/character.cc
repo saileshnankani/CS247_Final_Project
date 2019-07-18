@@ -9,7 +9,7 @@
 #include<utility>
 
 //TODO: Make all characters take a display letter, and change this MIL
-Character::Character(int x, int y) : coordinates(x,y), displayLetter{'A'} {}
+Character::Character(int x, int y, char displayLetter) : coordinates(x,y), displayLetter{displayLetter} {}
 Character::~Character() {}
 
 void Character::setCoordinates(std::pair<int, int> newCoordinates){

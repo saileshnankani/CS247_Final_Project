@@ -7,7 +7,8 @@
 
 std::unique_ptr<Player::Player_impl> Player::pimpl = std::make_unique<Player::Player_impl>();
 
-Player::Player(int x, int y) : Combatant(x, y) {}
+// We use P for player
+Player::Player(int x, int y) : Combatant(x, y, 'P') {}
 
 Player::~Player() {}
 
