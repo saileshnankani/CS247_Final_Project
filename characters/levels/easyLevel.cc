@@ -3,6 +3,6 @@
 
 EasyLevel::EasyLevel() {};
 
-EasyEnemy* EasyLevel::createEnemy(int x, int y){
-    return new EasyEnemy(x,y);
+EasyEnemy* EasyLevel::createEnemy(int x, int y, char displayLetter){
+    return new EasyEnemy(x,y, displayLetter);
 }

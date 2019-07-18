@@ -6,7 +6,7 @@
 
 class EasyLevel : public Level{
     public: 
-        EasyEnemy* createEnemy(int x, int y) override;
+        EasyEnemy* createEnemy(int x, int y, char displayLetter) override;
         EasyLevel();
 };
 

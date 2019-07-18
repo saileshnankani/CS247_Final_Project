@@ -20,7 +20,7 @@ protected:
     void setCoordinates(std::pair<int, int> newCoordinates);
 
 public:
-    Character(int x, int y);
+    Character(int x, int y, char displayLetter);
     virtual ~Character() = 0;
 
     char getDisplayLetter() const;

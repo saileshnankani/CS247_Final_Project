@@ -7,7 +7,7 @@ class Enemy : public Combatant{
         int health;
         int damageAmount;
     public:
-        Enemy(int x, int y, int health, int damageAmount);
+        Enemy(int x, int y, int health, int damageAmount, char displayLetter);
 
         void notify(Player &source) override;
         void notify(Enemy &source) override;

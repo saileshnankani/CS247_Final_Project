@@ -3,6 +3,6 @@
 
 HardLevel::HardLevel() {};
 
-HardEnemy* HardLevel::createEnemy(int x, int y){
-    return new HardEnemy(x,y);
+HardEnemy* HardLevel::createEnemy(int x, int y, char displayLetter){
+    return new HardEnemy(x,y, displayLetter);
 }

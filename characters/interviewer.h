@@ -58,7 +58,7 @@ class Interviewer : public Character
     Interview interview;
 
 public:
-    Interviewer(int x, int y, std::ifstream &interviewerFile);
+    Interviewer(int x, int y, std::ifstream &interviewerFile, char displayLetter);
     void notify(Player &source);
     void notify(Enemy &source);
     void interactFromTileToTile(Tile &from, Tile &to, std::pair<int, int> targetCoords) override;

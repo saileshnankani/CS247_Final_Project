@@ -48,7 +48,7 @@ class NPC : public Character
     Conversation conversation;
 
 public:
-    NPC(int x, int y, std::ifstream &npcFile);
+    NPC(int x, int y, std::ifstream &npcFile, char displayLetter);
 
     void notify(Player &source);
     void notify(Enemy &source);

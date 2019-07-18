@@ -8,7 +8,7 @@ class Level {
     public: 
         Level();
         virtual ~Level();
-        virtual Enemy* createEnemy(int x, int y)=0;
+        virtual Enemy* createEnemy(int x, int y, char displayLetter)=0;
 };
 
 #endif

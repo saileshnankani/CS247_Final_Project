@@ -82,7 +82,7 @@ void Interviewer::Interview::begin()
     }
 }
 
-Interviewer::Interviewer(int x, int y, std::ifstream &interviewerFile) : Character{x, y}, interview{interviewerFile} {}
+Interviewer::Interviewer(int x, int y, std::ifstream &interviewerFile, char displayLetter) : Character{x, y, displayLetter}, interview{interviewerFile} {}
 
 void Interviewer::notify(Player &source)
 {

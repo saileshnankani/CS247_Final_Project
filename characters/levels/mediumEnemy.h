@@ -5,7 +5,7 @@
 
 class MediumEnemy : public Enemy{
     public:
-        MediumEnemy(int x,int y, int health = 150, int damageAmount = 10);
+        MediumEnemy(int x,int y, char displayLetter, int health = 150, int damageAmount = 10);
 };
 
 #endif  

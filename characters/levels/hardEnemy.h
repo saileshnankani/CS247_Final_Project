@@ -5,7 +5,7 @@
 
 class HardEnemy : public Enemy{
     public:
-        HardEnemy(int x,int y, int health = 200, int damageAmount = 20);
+        HardEnemy(int x,int y, char displayLetter, int health = 200, int damageAmount = 20);
 };
 
 #endif  

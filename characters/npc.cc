@@ -7,7 +7,7 @@
 #include <iostream>
 #include <fstream>
 
-NPC::NPC(int x, int y, std::ifstream &npcFile) : Character{x, y}, conversation{npcFile} {}
+NPC::NPC(int x, int y, std::ifstream &npcFile, char displayLetter) : Character{x, y, displayLetter}, conversation{npcFile} {}
 
 NPC::Conversation::ConversationNode::ConversationNode(std::string response, std::vector<std::string> playerChoices, std::vector<ConversationNode> playerChoiceNodes)
     : response{response}, playerChoices{playerChoices}, playerChoiceNodes{playerChoiceNodes} {}
