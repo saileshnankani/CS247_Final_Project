@@ -35,8 +35,6 @@ Location::Location(string name, Level &level) : name{name}
     mapNPC.open("characters/" + name + "NPC.in");
     mapInterviewers.open("characters/" + name + "Interviewers.in");
 
-    std::cout << map.is_open() << mapCharacters.is_open() << mapNPC.is_open() << mapInterviewers.is_open()<<std::endl;
-
     if (map.is_open() && mapCharacters.is_open() && mapNPC.is_open() && mapInterviewers.is_open())
     {
         while (getline(map, line))
