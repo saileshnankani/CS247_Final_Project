@@ -1,4 +1,5 @@
 #include "graphic.h"
+#include <iostream>
 
 Graphic::Graphic(Location *currentLocation) : View{currentLocation} {
 
@@ -18,15 +19,22 @@ Graphic::~Graphic() {
 };
 
 void Graphic::updateView(){
+
+    std::cout<<"-----------------------------------------"<<std::endl;
+
+    const int health = currentLocation->getPlayerHealth();
+
+    std::cout<<"Current Location: "<<currentLocation->getName()<<std::endl;
+    std::cout<<"Health: "<<health<<std::endl;
+    std::cout<<std::endl;
+
+
     window->fillRectangle(0, 0, squareSize*maxWidth + pad*(maxWidth+1),
                         squareSize*height + pad*(height+1));
 
     int x = pad, y = pad;
     char tileChar = '0';
 
-    const int health = currentLocation->getPlayerHealth();
-
-    window->fillRectangle(0, 0, 200, 15, 0);
     window->drawString(0,0, "Health: "+health);
 
     y+= 20;
