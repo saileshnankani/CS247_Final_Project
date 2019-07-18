@@ -12,6 +12,7 @@
 #include<memory>
 #include "../characters/player.h"
 #include "../characters/npc.h"
+#include "../characters/interviewer.h"
 #include "../characters/enemy.h"
 #include "tile.h"
 #include "../characters/levels/level.h"
@@ -25,6 +26,7 @@ private:
     std::unique_ptr<Player> player;
     std::vector<std::unique_ptr<NPC>> nonPlayerCharacters; // I split up the array 'characters' because NPCs don't take a turn, as we see at the bottom of this class
     std::vector<std::unique_ptr<Enemy>> enemies;
+    std::vector<std::unique_ptr<Interviewer>> interviewers;
 
     std::vector<std::vector<Tile>> grid;
     // Doesn't really matter how grid is indexed, that is, x first VS. y first; don't get hung up on it
