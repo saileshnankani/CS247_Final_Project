@@ -59,6 +59,7 @@ void Model::initializeLevel(char levelChar){
             default:
             // TODO: change this to a proper output stream
             std::cout<< "Invalid input. Please enter E, M, or H."<<std::endl;
+            cin >> levelChar;
         }
     }
         
