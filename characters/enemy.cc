@@ -12,7 +12,7 @@ void Enemy::takeDamage(int damage)
 {
     health -= damage;
     //TODO: Remove this print statement
-    std::cout<<"The enemy took "<<damage<<" damage!"<<std::endl;
+    std::cout<<"The enemy took "<<damage<<" damage! They now have "<< health << " health!" <<std::endl;
 }
 
 int Enemy::getHealth() const

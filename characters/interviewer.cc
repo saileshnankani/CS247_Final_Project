@@ -47,6 +47,8 @@ Interviewer::Interview::Interview(std::ifstream &interviewerFile) : state{Interv
     }
 }
 
+int Interviewer::Interview::numberOfInterviewsFailed = 0;
+
 bool Interviewer::Interview::wasPassed(){
     return state == PASSED;
 }
@@ -73,13 +75,18 @@ void Interviewer::Interview::begin()
         else
         {
             state = FAILED;
-            std::cout << "You didn't pass that interview..." << std::endl;
+            std::cout << "You didn't pass that interview... Game Over!" << std::endl;
+            ++numberOfInterviewsFailed;
         }
     }
     else
     {
         std::cout << "You have already attended this interview" << std::endl;
     }
+}
+
+int Interviewer::Interview::getNumberOfInterviewsFailed(){
+    return numberOfInterviewsFailed;
 }
 
 Interviewer::Interviewer(int x, int y, std::ifstream &interviewerFile, char displayLetter) : Character{x, y, displayLetter}, interview{interviewerFile} {}

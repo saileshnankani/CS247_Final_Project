@@ -13,6 +13,7 @@
 // Interviews also should not be taken again.
 class Interviewer : public Character
 {
+public:
     // Interviews are just a sequence of questions, to which the answers
     // are given a certain score. If the total score passes a threshold
     // by the end of the interview, the interview is passed.
@@ -32,7 +33,10 @@ class Interviewer : public Character
 
         bool wasPassed();
 
+        static int getNumberOfInterviewsFailed();
+
     private:
+        static int numberOfInterviewsFailed;
         class InterviewNode
         {
             std::string question;
@@ -54,7 +58,7 @@ class Interviewer : public Character
         // A chain of questions and their potential answers
         std::vector<InterviewNode> interviewNodes;
     };
-
+private:
     Interview interview;
 
 public:
