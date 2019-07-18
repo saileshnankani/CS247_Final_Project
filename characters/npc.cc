@@ -73,7 +73,7 @@ void NPC::Conversation::startConversationFromCurrentNode()
         std::cin >> choice;
         while (choice < 0 || choice >= current->getNumPlayerChoices())
         {
-            std::cerr<<"Invalid input, please try again. Enter a number between 0 and "<<current->getNumPlayerChoices()-1<<std::endl<<std::endl;
+            std::cout<<"Invalid input, please try again. Enter a number between 0 and "<<current->getNumPlayerChoices()-1<<std::endl<<std::endl;
             std::cin >> choice;
         }
         // Go to the chosen child node in the conversation
