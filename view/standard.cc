@@ -7,8 +7,11 @@ Standard::Standard(Location* currentLocation) : View{currentLocation} {};
 
 void Standard::updateView(){
 
+    cout<<"-----------------------------------------"<<endl;
+
     const int health = currentLocation->getPlayerHealth();
 
+    cout<<"Current Location: "<<currentLocation->getName()<<endl;
     cout<<"Health: "<<health<<endl;
     cout<<endl;
 
@@ -19,5 +22,7 @@ void Standard::updateView(){
         }
         std::cout<<std::endl;
     }
-    cout<<"Enter your next move"<<endl;
+    cout<<endl;
+    cout<<"Enter your next move"<<endl<<endl;
+    cout<<"-----------------------------------------"<<endl<<endl;
 }
