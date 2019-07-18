@@ -2,7 +2,7 @@
 #include "player_impl.h"
 #include <iostream>
 
-Player::Player_impl::Player_impl() : health{100}, damageAmount{10} {}
+Player::Player_impl::Player_impl() : health{1000}, damageAmount{10} {}
 
 int Player::Player_impl::getDamage()
 {

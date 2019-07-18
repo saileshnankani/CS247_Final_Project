@@ -30,7 +30,7 @@
 *.exe
 *.out
 *.app
-run
+UWgame
 
 # VS Code
 *.vscode
