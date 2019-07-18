@@ -1,30 +1,30 @@
-M 2 5
-YOLO! I am Mansour.
+M 1 2
+The geese are going crazy and swarming into MC! I may be Mansour, but this is pretty scary.
 2
-no U
-no ME
-    Yeah, I am Mansour!
+I have interviews today! What do I do?
+Don't worry Professor, I will protect you!
+    You should run to the Tatham Centre!
     3
-    A1
-    B1
-    C1
-        MansourA1
+    How do I get there?
+    How can I protect myself?
+    Got it. Thanks Professor!
+        Move onto the 'teleporter tile' in the bottom right corner of the map!
         0
-        MansourB1
+        You must fend off the Geese! Moving onto a Goose's tile will attack that Goose.
         2
-        X
-        Y
-            MansourX
+        How can I get a Goose to stop attacking me?
+        Got it. Thank you!
+            You must attack that Goose until it flees (when its health reaches 0)
             0
-            MansourY
+            Run!
             0
-        MansourC1
+        Go, GO!
         0
-    No, I AM MANSOUR!
+    My hero! Who are you?
     2
-    A2
-    B2
-        MansourA2
+    I am the protagonist, and I will emerge victorious!
+    Just a diligent student.
+        Go get them!
         0
-        MansourB2
+        Your perseverance is amazing!
         0

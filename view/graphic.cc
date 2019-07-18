@@ -50,12 +50,22 @@ void Graphic::updateView(){
                 // Open tiles are white.
                 colour = 0;
             }
-            else if(tileChar == 'A'){
-                colour = 4;
+            else if(tileChar == 'P'){
+                colour = 3;
             }
             else if (tileChar == 'T') {
                 // Teleporters are red
                 colour = 2;
+            }
+            else if(tileChar == 'G'){
+                colour = 5;
+            }
+            else if(tileChar == 'X'){
+                colour = 6;
+            }
+            else {
+                // NPCs and Interviewers are blue
+                colour = 4;
             }
             
             window->fillRectangle(x, y, squareSize, squareSize, colour);

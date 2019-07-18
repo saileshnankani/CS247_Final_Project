@@ -242,6 +242,13 @@ void Location::updateState(Action a)
         }
         else{
         return false; } }), enemies.end());
+    interviewers.erase(std::remove_if(interviewers.begin(), interviewers.end(), [&](auto const &interviewerPtr) -> bool { 
+        if(interviewerPtr->interviewWasPassed()){
+        this->tileAt(interviewerPtr->getCoordinates()).evictOccupant();
+        return true;
+        }
+        else{
+        return false; } }), interviewers.end());
 }
 
 std::vector<std::vector<Tile>> Location::getGrid()
@@ -284,17 +291,19 @@ bool Location::isNextTileTeleporter(Action a)
     std::pair<int, int> targetTileCoords(x, y);
     if (isInteractiveTile(targetTileCoords))
     {
-        if(tileAt(targetTileCoords).getTileType()==tileAt(targetTileCoords).teleporter){
+        if (tileAt(targetTileCoords).getTileType() == tileAt(targetTileCoords).teleporter)
+        {
             return true;
         }
-        else{
+        else
+        {
             return false;
         }
     }
     return false;
-
 }
 
-string Location::getName(){
+string Location::getName()
+{
     return name;
 }

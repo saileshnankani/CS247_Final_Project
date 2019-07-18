@@ -39,3 +39,6 @@ UWgame
 
 # Make-related files
 Makefile_*
+
+# Not sure what these are...
+.nfs*

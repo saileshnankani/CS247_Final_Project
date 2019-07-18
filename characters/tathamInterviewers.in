@@ -1,50 +1,56 @@
-I 1 1
+I 7 9
+3
+Welcome to your first interview, with Cali Co. Fill in the blank. Machine ____
+2
+Learning
+1
+Laughing
+0
+Fill in the blank. _____ _____ Tree.
+3
+Binary Search
+1
+Dynamic Cast
+0
+Big Apple
+0
+Which of these data structures can represent a priority-queue?
 4
-Why are you so good at MATH 239?
-2
-Yes
-1
-No
+Trie
 0
-Why do you use dynamic casts so much?
+BST
+0
+Heap
+1
+The Google Data Science Building
+0
+J 10 9
 3
-I like the word dynamic
+Welcome to your second interview, with Sunny Surfin' Stackunderflow. How many bits are in a byte?
+4
+Four
+0
+Eight
 1
-*boots-and-casts-and-boots-and-casts*
+Six
 0
-Pickle
+Thirty-two
 0
-How funky fresh are your rhymes?
-2
-Freaky
-1
-Fine
-0
-Are you an Ariana Grande fan?
-2
-Yes
-1
-No
-0
-J 3 1
+What is the S in SOLID design principles?
 3
-Why are you so good at MATH 239?
-2
-Yes
-1
-No
+Stateful Execution Principle
 0
-Why do you use dynamic casts so much?
-3
-I like the word dynamic
-1
-*boots-and-casts-and-boots-and-casts*
+Substitutability Principle
 0
-Pickle
-0
-How funky fresh are your rhymes?
-2
-Freaky
+Single-Responsibility Principle
 1
-Fine
+What Design Pattern allows you to pass through the elements of a container?
+4
+Decorator
+0
+Mover
+0
+Iterator
+1
+Observer
 0

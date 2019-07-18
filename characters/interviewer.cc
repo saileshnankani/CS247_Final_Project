@@ -91,6 +91,10 @@ int Interviewer::Interview::getNumberOfInterviewsFailed(){
 
 Interviewer::Interviewer(int x, int y, std::ifstream &interviewerFile, char displayLetter) : Character{x, y, displayLetter}, interview{interviewerFile} {}
 
+bool Interviewer::interviewWasPassed(){
+    return interview.wasPassed();
+}
+
 void Interviewer::notify(Player &source)
 {
     interview.begin();
