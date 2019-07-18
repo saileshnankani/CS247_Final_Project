@@ -8,6 +8,7 @@
 #include "location.h"
 #include "../characters/enemy.h"
 #include "../characters/npc.h"
+#include "../characters/interviewer.h"
 #include "../characters/player.h"
 #include "tile.h"
 #include "../characters/levels/level.h"
@@ -25,16 +26,18 @@ Location::Location(string name, Level &level) : name{name}
     ifstream map;
     ifstream mapCharacters;
     ifstream mapNPC;
+    ifstream mapInterviewers;
 
     // It seems like the path is relative to where the executable is created,
     // not sure why.
     map.open("locations/" + name + ".in");
     mapCharacters.open("characters/" + name + "Characters.in");
     mapNPC.open("characters/" + name + "NPC.in");
+    mapInterviewers.open("characters/" + name + "Interviewers.in");
 
-    std::cout << map.is_open() << mapCharacters.is_open() << mapNPC.is_open() << std::endl;
+    std::cout << map.is_open() << mapCharacters.is_open() << mapNPC.is_open() << mapInterviewers.is_open()<<std::endl;
 
-    if (map.is_open() && mapCharacters.is_open() && mapNPC.is_open())
+    if (map.is_open() && mapCharacters.is_open() && mapNPC.is_open() && mapInterviewers.is_open())
     {
         while (getline(map, line))
         {
@@ -108,11 +111,27 @@ Location::Location(string name, Level &level) : name{name}
             Tile &tile = tileAt(make_pair(npc_pos_x, npc_pos_y));
             tile.addOccupant(newNPC);
         }
+
+        // Interviewers must have an interview (even if it is only 1 node large)
+        while (getline(mapInterviewers, line))
+        {
+            char interviewerLetter;
+            int interviewer_pos_x;
+            int interviewer_pos_y;
+            stringstream ss(line);
+            // TODO: Allow NPCs to take a single-letter name.
+            ss >> interviewerLetter >> interviewer_pos_x >> interviewer_pos_y;
+            Interviewer *newInterviewer = new Interviewer(interviewer_pos_x, interviewer_pos_y, mapInterviewers);
+            interviewers.emplace_back(std::unique_ptr<Interviewer>(newInterviewer));
+            Tile &tile = tileAt(make_pair(interviewer_pos_x, interviewer_pos_y));
+            tile.addOccupant(newInterviewer);
+        }
     }
 
     map.close();
     mapCharacters.close();
     mapNPC.close();
+    mapInterviewers.close();
 }
 
 Tile &Location::tileAt(const std::pair<int, int> &coords)
