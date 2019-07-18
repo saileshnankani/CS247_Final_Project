@@ -6,6 +6,9 @@ Keyboard::Keyboard(std::istream&in): in{in} {
   theMap["d"] = Action::RIGHT;
   theMap["s"] = Action::DOWN;
   theMap["a"] = Action::LEFT;
+  theMap["q"] = Action::QUIT;
+  theMap["y"] = Action::YES;
+  theMap["n"] = Action::NO;
 }
 
 Action Keyboard::action(){

@@ -10,6 +10,7 @@ CurseKeyboard::CurseKeyboard() {
   mapping[KEY_RIGHT] = Action::RIGHT;
   mapping[KEY_DOWN] = Action::DOWN;
   mapping[KEY_LEFT] = Action::LEFT;
+  mapping['q'] = Action::QUIT;
 }
 
 Action CurseKeyboard::action(){
