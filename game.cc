@@ -12,7 +12,7 @@ using namespace std;
 
 Game::Game(bool ncurses, bool graphic) : model(){
 
-    cout<<"Choose a difficulty level: easy(E), medium(M), or hard(H)"<<endl;
+    cout<<endl<<"Choose a difficulty level: easy(E), medium(M), or hard(H)"<<endl<<endl;
     char levelChar;
     cin >> levelChar;
 
@@ -51,10 +51,21 @@ void Game::run() {
     while(!model.getIsGameOver() && std::cin){
         model.displayViews();
         a = model.getAction(); 
-        isTeleported = model.getTeleportationStatus(a);     
+        isTeleported = model.getTeleportationStatus(a); 
+        if(a == QUIT){
+            cout<<endl<<"Are you sure you want to quit? (y/n)"<<endl;
+            a = model.getAction();
+            switch(a){
+                case YES:
+                    return;
+                case NO:
+                    continue;
+            }
+        }    
         if(isTeleported){
             model.setNextLocation();
-            cout<<model.getCurrentLocation()->getName()<<endl;
+            cout<<endl<<"-----------------------------------------"<<endl;
+            cout<<"Welcome to "<<model.getCurrentLocation()->getName()<<endl;
             if(model.staticNcurses){
                 model.replaceView(std::move(std::make_unique<Curses>(model.getCurrentLocation())));
             }
