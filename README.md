@@ -2,7 +2,7 @@
 
 Welcome to the UW Game!
 
-The UW Game is a Role-playing game (RPG), where a co-operative education student going to the University of Waterloo tries to find their way to California.
+The UW Game is a terminal-based Role-playing game (RPG), where a co-operative education student going to the University of Waterloo tries to find their way to California.
 But first, they must battle geese, answer tough questions, and interact with Waterloo community.
 The player progresses through each location by moving around the map to have conversation with non-player characters (NPC) and engage in combat.
 The player has health, which needs to remain positive throughout the game.
