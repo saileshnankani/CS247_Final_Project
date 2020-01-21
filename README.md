@@ -8,6 +8,8 @@ The player progresses through each location by moving around the map to have con
 The player has health, which needs to remain positive throughout the game.
 If the player is able to pass all of their interviews, they go to California and complete the game! :sunny:
 
+For a UML diagram of the entire game system, open the "UML Diagram.pdf" file in the root directory.
+
 This project was made by _Sailesh Nankanki, Angelo Lao, Rosie Bahrani_ for the Software Design Principles course (CS 247) at the University of Waterloo.
 
 ## Overview
